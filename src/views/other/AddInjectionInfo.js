@@ -25,8 +25,8 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 
-const AddInjectionInfo = ({ userId, setUserId }) => {
-  const [phone, setPhone] = useState("");
+export const AddInjectionInfo = ({ userId, setUserId }) => {
+  const [phone, setPhone] = useState('');
 
   const [totalUserInfo, setTotalUserInfo] = useState("");
   const [totalInjectionInfo, setTotalInjectionInfo] = useState([]);
