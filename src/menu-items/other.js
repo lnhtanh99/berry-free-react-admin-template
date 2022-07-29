@@ -44,7 +44,7 @@ const other = {
                     id: 'material-icons',
                     title: 'Thông tin lây nhiễm',
                     type: 'item',
-                    url: '/icons/material-icons',
+                    url: '/admin/add-info',
                     breadcrumbs: false
                 }
             ]

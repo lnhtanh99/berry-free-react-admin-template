@@ -18,6 +18,7 @@ const Register = Loadable(lazy(() => import('views/utilities/Register')));
 
 const Role = Loadable(lazy(() => import('views/other/Role')));
 const AddInjectionInfo = Loadable(lazy(() => import('views/other/AddInjectionInfo')));
+const AddInfo = Loadable(lazy(() => import('views/other/AddInfo')));
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
@@ -117,7 +118,16 @@ const MainRoutes = {
             children: [
                 {
                     path: 'add-injection-info',
-                    element: <Role />
+                    element: <AddInjectionInfo />
+                }
+            ]
+        },
+        {
+            path: 'admin',
+            children: [
+                {
+                    path: 'add-info',
+                    element: <AddInfo />
                 }
             ]
         },
