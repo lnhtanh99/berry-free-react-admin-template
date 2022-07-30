@@ -19,8 +19,8 @@ const Register = Loadable(lazy(() => import('views/utilities/Register')));
 const Role = Loadable(lazy(() => import('views/other/Role')));
 const AddInjectionInfo = Loadable(lazy(() => import('views/other/AddInjectionInfo')));
 const AddInfo = Loadable(lazy(() => import('views/other/AddInfo')));
+const ConfirmChange = Loadable(lazy(() => import('views/other/ConfirmChange')));
 // sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -128,6 +128,15 @@ const MainRoutes = {
                 {
                     path: 'add-info',
                     element: <AddInfo />
+                }
+            ]
+        },
+        {
+            path: 'admin',
+            children: [
+                {
+                    path: 'confirm-change',
+                    element: <ConfirmChange />
                 }
             ]
         },

@@ -11,6 +11,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
+import { Card, CardContent, Container } from '@mui/material';
+
+import { makeStyles } from "@mui/styles";
+
 
 const AddRole = () => {
     const [phone, setPhone] = useState('');
@@ -25,6 +29,18 @@ const AddRole = () => {
     const [currentRole, setCurrentRole] = useState("")
 
     const navigate = useNavigate();
+
+    const useStyles = makeStyles((theme) => ({
+        header: {
+            marginBottom: '30px',
+            textTransform: 'uppercase',
+        },
+        textField: {
+            marginBottom: '38px'
+        }
+    }));
+
+    const classes = useStyles();
 
     onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
@@ -85,84 +101,90 @@ const AddRole = () => {
     }
 
     return (
-        <div className="container addRole">
-            {' '}
-            {userRole === 'admin' ? (
-                userInfo ? (
-                    <div>
-                        <div>
-                            <Typography variant="h4" gutterBottom>
-                                Thông tin người dùng{' '}
-                            </Typography>{' '}
-                        </div>{' '}
-                        <div>
-                            <Typography variant="h5" gutterBottom>
-                                Họ và tên: {userInfo.name}{' '}
-                            </Typography>{' '}
-                        </div>{' '}
-                        <div>
-                            <Typography variant="h5" gutterBottom>
-                                Vai trò: {userInfo.assignedRole}{' '}
-                            </Typography>{' '}
-                        </div>
-                        <div>
-                            <div className="addRole-form">
-                                {' '}
-                                <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
-                                    <InputLabel id="demo-simple-select-label">Phân quyền </InputLabel>{' '}
-                                    <Select
-                                        className="addRole-role"
-                                        onChange={(e) => setRole(e.target.value)}
-                                        value={role}
-                                        label={'Phân quyền'}
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                    >
-                                        <MenuItem value="user"> User </MenuItem> 
-                                        <MenuItem value="moderator"> Moderator </MenuItem>{' '}
-                                    </Select>{' '}
-                                </FormControl>{' '}
-                            </div>{' '}
+        <Container>
+            <Card>
+                {userRole === 'admin' ? (
+                    userInfo ? (
+                        <CardContent sx={{ textAlign: 'center' }}>
+                            <Typography variant="h2" className={classes.header} gutterBottom>
+                                Thông tin người dùng
+                            </Typography>
+                            <TextField
+                                className={classes.textField}
+                                label="Họ và tên:"
+                                defaultValue={userInfo.name}
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                                fullWidth
+                                variant="outlined"
+                            />
+                            <TextField
+                                className={classes.textField}
+                                label="Vai trò:"
+                                defaultValue={userInfo.assignedRole}
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                                fullWidth
+                                variant="outlined"
+                            />
                             <div>
+                                <Stack className="addRole-form">
+                                    <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
+                                        <InputLabel id="demo-simple-select-label">Phân quyền </InputLabel>{' '}
+                                        <Select
+                                            className="addRole-role"
+                                            onChange={(e) => setRole(e.target.value)}
+                                            value={role}
+                                            label={'Phân quyền'}
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                        >
+                                            <MenuItem value="user"> User </MenuItem>
+                                            <MenuItem value="moderator"> Moderator </MenuItem>{' '}
+                                        </Select>
+                                    </FormControl>
+                                </Stack>
                                 <Button variant="contained" type="submit" onClick={submitInfoHandler}>
-                                    Gửi{' '}
-                                </Button>{' '}
-                            </div>{' '}
-                        </div>{' '}
-                    </div>
+                                    Gửi
+                                </Button>
+                            </div>
+                        </CardContent>
+                    ) : (
+                        <CardContent >
+                            <form className="addRole-form">
+                                <Stack spacing={2} >
+                                    <TextField
+                                        id="standard-basic"
+                                        variant="standard"
+                                        type="text"
+                                        label="Tìm theo số điện thoại"
+                                        className="addInfo-findWithPhone"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                    />{' '}
+                                    <Button variant="contained" type="sumbit" onClick={findInfoByPhoneHandler}>
+                                        Tìm{' '}
+                                    </Button>{' '}
+                                </Stack>{' '}
+                            </form>{' '}
+                        </CardContent>
+                    )
                 ) : (
                     <div>
-                        <form className="addRole-form">
-                            <Stack spacing={2}>
-                                <TextField
-                                    id="standard-basic"
-                                    variant="standard"
-                                    type="text"
-                                    label="Tìm theo số điện thoại"
-                                    className="addInfo-findWithPhone"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                />{' '}
-                                <Button variant="contained" type="sumbit" onClick={findInfoByPhoneHandler}>
-                                    Tìm{' '}
-                                </Button>{' '}
-                            </Stack>{' '}
-                        </form>{' '}
+                        <div>
+                            <Typography variant="subtitle1" gutterBottom>
+                                Bạn không đủ quyền hạn để truy cập{' '}
+                            </Typography>{' '}
+                        </div>{' '}
+                        <Button variant="contained" onClick={backToMainPagehandler}>
+                            Quay lại trang chủ{' '}
+                        </Button>{' '}
                     </div>
-                )
-            ) : (
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" gutterBottom>
-                            Bạn không đủ quyền hạn để truy cập{' '}
-                        </Typography>{' '}
-                    </div>{' '}
-                    <Button variant="contained" onClick={backToMainPagehandler}>
-                        Quay lại trang chủ{' '}
-                    </Button>{' '}
-                </div>
-            )}{' '}
-        </div>
+                )}{' '}
+            </Card>
+        </Container>
     );
 };
 

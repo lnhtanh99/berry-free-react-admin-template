@@ -16,8 +16,14 @@ import {
 } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import {Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography} from "@mui/material";
-
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
 
 const AddInfo = ({ userId, setUserId }) => {
   const navigate = useNavigate();
@@ -178,8 +184,6 @@ const AddInfo = ({ userId, setUserId }) => {
       });
       setTotalUserInfo(users);
     });
-    console.log(userId);
-    console.log(totalUserInfo);
   }, [userId, userInfo]);
 
   return (
@@ -226,24 +230,6 @@ const AddInfo = ({ userId, setUserId }) => {
                 </div>
               </div>
               <div>
-                {/* <div>
-              <input
-                type="text"
-                placeholder="Địa điểm tiêm"
-                className="addInfo-place"
-                value={place}
-                onChange={(e) => setPlace(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="date"
-                placeholder="Ngày tiêm"
-                className="addInfo-date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div> */}
                 <div>
                   {" "}
                   <FormControl variant="outlined" sx={{ m: 1, minWidth: 210 }}>
@@ -251,12 +237,12 @@ const AddInfo = ({ userId, setUserId }) => {
                       Số lần đã tiêm:{" "}
                     </InputLabel>
                     <Select
-                      label={"Số lần đã tiêm"}
+                      label="Số lần đã tiêm"
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       className="addInfo-times"
-                      onChange={(e) => setTimes(e.target.value)}
-                      value={times}
+                      // onChange={(e) => setTimes(e.target.value)}
+                      // value={times}
                     >
                       {" "}
                       <MenuItem value="Chưa tiêm">Chưa tiêm</MenuItem>
@@ -276,15 +262,15 @@ const AddInfo = ({ userId, setUserId }) => {
                         Mũi 1
                       </InputLabel>
                       <Select
-                        label={"Mũi 1"}
+                        label="Mũi 1"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        onChange={(e) => setVaccineType1(e.target.value)}
-                        value={vaccineType1}
+                        // onChange={(e) => setVaccineType1(e.target.value)}
+                        // value={vaccineType1}
                       >
-                        <MenuItem value="" disabled>
+                        {/* <MenuItem value="" disabled>
                           Chọn loại vaccine
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem value="Nanocovax">Nanocovax</MenuItem>
                         <MenuItem value="Pfizer-BioNTech">
                           Pfizer-BioNTech
@@ -304,15 +290,15 @@ const AddInfo = ({ userId, setUserId }) => {
                         Mũi 2
                       </InputLabel>
                       <Select
-                        label={"Mũi 2"}
+                        label="Mũi 2"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        onChange={(e) => setVaccineType2(e.target.value)}
-                        value={vaccineType2}
+                        // onChange={(e) => setVaccineType2(e.target.value)}
+                        // value={vaccineType2}
                       >
-                        <MenuItem value="" disabled>
+                        {/* <MenuItem value="" disabled>
                           Chọn loại vaccine
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem value="Nanocovax">Nanocovax</MenuItem>
                         <MenuItem value="Pfizer-BioNTech">
                           Pfizer-BioNTech
@@ -331,15 +317,15 @@ const AddInfo = ({ userId, setUserId }) => {
                         Mũi 3
                       </InputLabel>
                       <Select
-                        label={"Mũi 3"}
+                        label="Mũi 3"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        onChange={(e) => setVaccineType3(e.target.value)}
-                        value={vaccineType3}
+                        // onChange={(e) => setVaccineType3(e.target.value)}
+                        // value={vaccineType3}
                       >
-                        <MenuItem value="" disabled>
+                        {/* <MenuItem value="" disabled>
                           Chọn loại vaccine
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem value="Nanocovax">Nanocovax</MenuItem>
                         <MenuItem value="Pfizer-BioNTech">
                           Pfizer-BioNTech
@@ -363,8 +349,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     variant="outlined"
                     type="date"
                     className="register-dob"
-                    value={injectDate1}
-                    onChange={(e) => setInjectDate1(e.target.value)}
+                    // value={injectDate1}
+                    // onChange={(e) => setInjectDate1(e.target.value)}
                   />
                   <TextField
                     sx={{ margin: 1, minWidth: 210 }}
@@ -373,8 +359,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     variant="outlined"
                     type="date"
                     className="register-dob"
-                    value={injectDate2}
-                    onChange={(e) => setInjectDate2(e.target.value)}
+                    // value={injectDate2}
+                    // onChange={(e) => setInjectDate2(e.target.value)}
                   />
                   <TextField
                     sx={{ margin: 1, minWidth: 210 }}
@@ -383,8 +369,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     variant="outlined"
                     type="date"
                     className="register-dob"
-                    value={injectDate3}
-                    onChange={(e) => setInjectDate3(e.target.value)}
+                    // value={injectDate3}
+                    // onChange={(e) => setInjectDate3(e.target.value)}
                   />
                 </Stack>
                 <Stack
@@ -400,8 +386,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     type="text"
                     label="Đơn vị tiêm mũi 1"
                     className="addInfo-findWithPhone"
-                    value={injectPerson1}
-                    onChange={(e) => setInjectPerson1(e.target.value)}
+                    // value={injectPerson1}
+                    // onChange={(e) => setInjectPerson1(e.target.value)}
                   />
                   <TextField
                     id="standard-basic"
@@ -409,8 +395,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     type="text"
                     label="Đơn vị tiêm mũi 2"
                     className="addInfo-findWithPhone"
-                    value={injectPerson2}
-                    onChange={(e) => setInjectPerson2(e.target.value)}
+                    // value={injectPerson2}
+                    // onChange={(e) => setInjectPerson2(e.target.value)}
                   />
                   <TextField
                     id="standard-basic"
@@ -418,8 +404,8 @@ const AddInfo = ({ userId, setUserId }) => {
                     type="text"
                     label="Đơn vị tiêm mũi 3"
                     className="addInfo-findWithPhone"
-                    value={injectPerson3}
-                    onChange={(e) => setInjectPerson3(e.target.value)}
+                    // value={injectPerson3}
+                    // onChange={(e) => setInjectPerson3(e.target.value)}
                   />
                 </Stack>
                 <Stack spacing={2} direction="row" className="addInfo-button">
@@ -456,15 +442,15 @@ const AddInfo = ({ userId, setUserId }) => {
                         Số lần nhiễm bệnh
                       </InputLabel>
                       <Select
-                        label={"Số lần nhiễm bệnh"}
+                        label="Số lần nhiễm bệnh"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        onChange={(e) => setInfectedTimes(e.target.value)}
-                        value={infectedTimes}
+                        // onChange={(e) => setInfectedTimes(e.target.value)}
+                        // value={infectedTimes}
                       >
-                        <MenuItem value="" disabled>
+                        {/* <MenuItem value="" disabled>
                           Số lần nhiễm bệnh
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem value="1 lần">1 lần</MenuItem>
                         <MenuItem value="2 lần">2 lần</MenuItem>
                         <MenuItem value="3 lần">3 lần</MenuItem>
@@ -485,8 +471,8 @@ const AddInfo = ({ userId, setUserId }) => {
                             variant="outlined"
                             type="date"
                             className="register-dob"
-                            value={infectedDate1}
-                            onChange={(e) => setInfectedDate1(e.target.value)}
+                            // value={infectedDate1}
+                            // onChange={(e) => setInfectedDate1(e.target.value)}
                           />
                         </Stack>
                         <Stack
@@ -502,8 +488,8 @@ const AddInfo = ({ userId, setUserId }) => {
                             type="text"
                             label="Ghi chú lần 1"
                             className="addInfo-findWithPhone"
-                            value={infectedNote1}
-                            onChange={(e) => setInfectedNote1(e.target.value)}
+                            // value={infectedNote1}
+                            // onChange={(e) => setInfectedNote1(e.target.value)}
                           />
                         </Stack>
                       </div>
@@ -524,10 +510,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                 variant="outlined"
                                 type="date"
                                 className="register-dob"
-                                value={infectedDate1}
-                                onChange={(e) =>
-                                  setInfectedDate1(e.target.value)
-                                }
+                                // value={infectedDate1}
+                                // onChange={(e) =>
+                                //   setInfectedDate1(e.target.value)
+                                // }
                               />
                               <TextField
                                 sx={{ margin: 1, minWidth: 210 }}
@@ -536,10 +522,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                 variant="outlined"
                                 type="date"
                                 className="register-dob"
-                                value={infectedDate2}
-                                onChange={(e) =>
-                                  setInfectedDate2(e.target.value)
-                                }
+                                // value={infectedDate2}
+                                // onChange={(e) =>
+                                //   setInfectedDate2(e.target.value)
+                                // }
                               />
                             </Stack>
                             <Stack
@@ -555,10 +541,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                 type="text"
                                 label="Ghi chú lần 1"
                                 className="addInfo-findWithPhone"
-                                value={infectedNote1}
-                                onChange={(e) =>
-                                  setInfectedNote1(e.target.value)
-                                }
+                                // value={infectedNote1}
+                                // onChange={(e) =>
+                                //   setInfectedNote1(e.target.value)
+                                // }
                               />
                               <TextField
                                 id="standard-basic"
@@ -566,10 +552,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                 type="text"
                                 label="Ghi chú lần 2"
                                 className="addInfo-findWithPhone"
-                                value={infectedNote2}
-                                onChange={(e) =>
-                                  setInfectedNote2(e.target.value)
-                                }
+                                // value={infectedNote2}
+                                // onChange={(e) =>
+                                //   setInfectedNote2(e.target.value)
+                                // }
                               />
                             </Stack>
                           </div>
@@ -590,10 +576,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     variant="outlined"
                                     type="date"
                                     className="register-dob"
-                                    value={infectedDate1}
-                                    onChange={(e) =>
-                                      setInfectedDate1(e.target.value)
-                                    }
+                                    // value={infectedDate1}
+                                    // onChange={(e) =>
+                                    //   setInfectedDate1(e.target.value)
+                                    // }
                                   />
                                   <TextField
                                     sx={{ margin: 1, minWidth: 210 }}
@@ -602,10 +588,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     variant="outlined"
                                     type="date"
                                     className="register-dob"
-                                    value={infectedDate2}
-                                    onChange={(e) =>
-                                      setInfectedDate2(e.target.value)
-                                    }
+                                    // value={infectedDate2}
+                                    // onChange={(e) =>
+                                    //   setInfectedDate2(e.target.value)
+                                    // }
                                   />
                                   <TextField
                                     sx={{ margin: 1, minWidth: 210 }}
@@ -614,10 +600,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     variant="outlined"
                                     type="date"
                                     className="register-dob"
-                                    value={infectedDate3}
-                                    onChange={(e) =>
-                                      setInfectedDate3(e.target.value)
-                                    }
+                                    // value={infectedDate3}
+                                    // onChange={(e) =>
+                                    //   setInfectedDate3(e.target.value)
+                                    // }
                                   />
                                 </Stack>
                                 <Stack
@@ -633,10 +619,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     type="text"
                                     label="Ghi chú lần 1"
                                     className="addInfo-findWithPhone"
-                                    value={infectedNote1}
-                                    onChange={(e) =>
-                                      setInfectedNote1(e.target.value)
-                                    }
+                                    // value={infectedNote1}
+                                    // onChange={(e) =>
+                                    //   setInfectedNote1(e.target.value)
+                                    // }
                                   />
                                   <TextField
                                     id="standard-basic"
@@ -644,10 +630,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     type="text"
                                     label="Ghi chú lần 2"
                                     className="addInfo-findWithPhone"
-                                    value={infectedNote2}
-                                    onChange={(e) =>
-                                      setInfectedNote2(e.target.value)
-                                    }
+                                    // value={infectedNote2}
+                                    // onChange={(e) =>
+                                    //   setInfectedNote2(e.target.value)
+                                    // }
                                   />
                                   <TextField
                                     id="standard-basic"
@@ -655,10 +641,10 @@ const AddInfo = ({ userId, setUserId }) => {
                                     type="text"
                                     label="Ghi chú lần 3"
                                     className="addInfo-findWithPhone"
-                                    value={infectedNote3}
-                                    onChange={(e) =>
-                                      setInfectedNote3(e.target.value)
-                                    }
+                                    // value={infectedNote3}
+                                    // onChange={(e) =>
+                                    //   setInfectedNote3(e.target.value)
+                                    // }
                                   />
                                 </Stack>
                               </div>

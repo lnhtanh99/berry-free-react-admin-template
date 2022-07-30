@@ -1,43 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { onSnapshot, setDoc, doc, deleteDoc, addDoc } from '@firebase/firestore';
-import { auth, queryGetUserInfoByPhone, queryGetUserInfoByEmail, dataRef, db, injectionRef } from '../../firebase/firebase';
-import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import Typography from '@mui/material/Typography';
+import React, { useState, useEffect } from "react";
+import {
+    onSnapshot,
+    setDoc,
+    doc,
+    deleteDoc,
+    addDoc,
+} from "@firebase/firestore";
+import {
+    auth,
+    queryGetUserInfoByPhone,
+    queryGetUserInfoByEmail,
+    dataRef,
+    db,
+    injectionRef,
+} from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
 
-const AddInjectionInfo = ({ userId, setUserId }) => {
-    const [phone, setPhone] = useState('');
+const AddInjectionInfo = () => {
+    const [phone, setPhone] = useState("");
+    const [userId, setUserId] = useState("")
 
-    const [totalUserInfo, setTotalUserInfo] = useState('');
+    const [totalUserInfo, setTotalUserInfo] = useState("");
     const [totalInjectionInfo, setTotalInjectionInfo] = useState([]);
 
-    const [infectedTimes, setInfectedTimes] = useState('');
+    const [infectedTimes, setInfectedTimes] = useState("");
 
-    const [infectedDate1, setInfectedDate1] = useState('');
-    const [infectedDate2, setInfectedDate2] = useState('');
-    const [infectedDate3, setInfectedDate3] = useState('');
+    const [infectedDate1, setInfectedDate1] = useState("");
+    const [infectedDate2, setInfectedDate2] = useState("");
+    const [infectedDate3, setInfectedDate3] = useState("");
 
-    const [curedDate1, setCuredDate1] = useState('');
-    const [curedDate2, setCuredDate2] = useState('');
-    const [curedDate3, setCuredDate3] = useState('');
+    const [curedDate1, setCuredDate1] = useState("");
+    const [curedDate2, setCuredDate2] = useState("");
+    const [curedDate3, setCuredDate3] = useState("");
 
-    const [infectedNote1, setInfectedNote1] = useState('');
-    const [infectedNote2, setInfectedNote2] = useState('');
-    const [infectedNote3, setInfectedNote3] = useState('');
+    const [infectedNote1, setInfectedNote1] = useState("");
+    const [infectedNote2, setInfectedNote2] = useState("");
+    const [infectedNote3, setInfectedNote3] = useState("");
 
-    const [userInfo, setUserInfo] = useState('');
-    const [userRole, setUserRole] = useState('');
-    const [userEmail, setUserEmail] = useState('');
+    const [userInfo, setUserInfo] = useState("");
+    const [userRole, setUserRole] = useState("");
+    const [userEmail, setUserEmail] = useState("");
     // const [userIdNumber, setUserIdNumber] = useState("");
     const [injectionInfo, setInjectionInfo] = useState({});
-    const [injectionId, setInjectionId] = useState('');
+    const [injectionId, setInjectionId] = useState("");
 
     onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
@@ -55,22 +69,26 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                 console.log(snapshot._snapshot.docChanges.length);
                 if (snapshot._snapshot.docChanges.length === 0) {
                     //due to changes in Register, this may no longer useful
-                    if (window.confirm('Không tìm thấy dữ liệu người dùng. \n Nhấn OK để tạo dữ liệu')) {
+                    if (
+                        window.confirm(
+                            "Không tìm thấy dữ liệu người dùng. \n Nhấn OK để tạo dữ liệu"
+                        )
+                    ) {
                         addDoc(injectionRef, {
                             phone: phone,
-                            firstDose: '',
-                            secondDose: '',
-                            thirdDose: '',
-                            numberOfInjections: '',
-                            infectedTimes: '',
-                            injectDate1: '',
-                            injectDate2: '',
-                            injectDate3: '',
-                            injectPerson1: '',
-                            injectPerson2: '',
-                            injectPerson3: ''
+                            firstDose: "",
+                            secondDose: "",
+                            thirdDose: "",
+                            numberOfInjections: "",
+                            infectedTimes: "",
+                            injectDate1: "",
+                            injectDate2: "",
+                            injectDate3: "",
+                            injectPerson1: "",
+                            injectPerson2: "",
+                            injectPerson3: "",
                         })
-                            .then(window.alert('Tạo dữ liệu thành công'))
+                            .then(window.alert("Tạo dữ liệu thành công"))
                             .catch((err) => {
                                 console.log(err);
                             });
@@ -96,7 +114,7 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
     };
     const submitInfectedInfoHandler = (e) => {
         e.preventDefault();
-        setDoc(doc(db, 'injectionData', injectionId), {
+        setDoc(doc(db, "injectionData", injectionId), {
             ...injectionInfo,
             infectedDate1: infectedDate1,
             infectedDate2: infectedDate2,
@@ -107,7 +125,7 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
             curedDate1,
             curedDate2,
             curedDate3,
-            infectedTimes: infectedTimes
+            infectedTimes: infectedTimes,
         });
     };
 
@@ -126,186 +144,205 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
             });
             setTotalUserInfo(users);
         });
-        console.log(userRole);
-    }, [userId, userEmail, userRole]);
+        console.log(totalInjectionInfo);
+    }, [userId, userEmail]);
 
     return (
         <Stack className="container addInfo">
-            {' '}
-            {userRole === 'admin' || userRole === 'moderator' ? (
+            {userRole === "admin" || userRole === "moderator" ? (
                 <Stack>
-                    {' '}
                     {userInfo ? (
                         <Stack>
                             <Stack>
                                 <Stack>
                                     <Typography variant="h4" gutterBottom>
-                                        Thông tin người dùng{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Thông tin người dùng
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Họ và tên: {userInfo.name}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Họ và tên: {userInfo.name}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Ngày sinh: {userInfo.dob}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Ngày sinh: {userInfo.dob}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Số mũi đã tiêm: {injectionInfo.numberOfInjections}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Số mũi đã tiêm: {injectionInfo.numberOfInjections}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 1: {injectionInfo.firstDose}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Mũi số 1: {injectionInfo.firstDose}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 2: {injectionInfo.secondDose}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Mũi số 2: {injectionInfo.secondDose}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 3: {injectionInfo.thirdDose}{' '}
-                                    </Typography>{' '}
-                                </Stack>{' '}
+                                        Mũi số 3: {injectionInfo.thirdDose}{" "}
+                                    </Typography>
+                                </Stack>
                                 <Stack>
-                                    <Typography variant="h6" gutterBottom>
-                                        Lịch sử lây nhiễm{' '}
-                                    </Typography>{' '}
-                                    {injectionInfo.infectedTimes === '' ? (
+                                    <Typography variant="h4" gutterBottom>
+                                        Lịch sử lây nhiễm
+                                    </Typography>
+                                    {injectionInfo.infectedTimes === "" ? (
                                         <Stack>
                                             <Typography variant="subtitle1" gutterBottom>
-                                                <em> Bạn chưa từng nhiễm bệnh </em>{' '}
-                                            </Typography>{' '}
+                                                <em>Bạn chưa từng nhiễm bệnh</em>
+                                            </Typography>
                                         </Stack>
                                     ) : (
                                         <Stack>
                                             <Stack>
-                                                {' '}
-                                                {injectionInfo.infectedDate1 === '' ? (
-                                                    ''
+                                                {injectionInfo.infectedDate1 === "" ? (
+                                                    ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack direction="row" className="addInfo-button" spacing={1}>
+                                                        <Stack
+                                                            direction="row"
+                                                            className="addInfo-button"
+                                                            spacing={1}
+                                                        >
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 1: {injectionInfo.infectedDate1} - {''}{' '}
-                                                            </Typography>{' '}
+                                                                Ngày nhiễm bệnh lần 1:{" "}
+                                                                {injectionInfo.infectedDate1} - {""}
+                                                            </Typography>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate1} {''}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                Ngày khỏi bệnh: {injectionInfo.curedDate1} {""}
+                                                            </Typography>
+                                                        </Stack>
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                {' '}
-                                                                {injectionInfo.infectedNote1 === '' ? (
+                                                                {injectionInfo.infectedNote1 === "" ? (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có{' '}
+                                                                        Ghi chú: Không có
                                                                     </Typography>
                                                                 ) : (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote1}{' '}
+                                                                        Ghi chú: {injectionInfo.infectedNote1}
                                                                     </Typography>
-                                                                )}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                )}
+                                                            </Typography>
+                                                        </Stack>
                                                     </Stack>
-                                                )}{' '}
-                                            </Stack>{' '}
+                                                )}
+                                            </Stack>
                                             <Stack>
-                                                {' '}
-                                                {injectionInfo.infectedDate2 === '' ? (
-                                                    ''
+                                                {injectionInfo.infectedDate2 === "" ? (
+                                                    ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack direction="row" className="addInfo-button" spacing={1}>
+                                                        <Stack
+                                                            direction="row"
+                                                            className="addInfo-button"
+                                                            spacing={1}
+                                                        >
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 2: {injectionInfo.infectedDate2} - {''}{' '}
-                                                            </Typography>{' '}
+                                                                Ngày nhiễm bệnh lần 2:{" "}
+                                                                {injectionInfo.infectedDate2} - {""}
+                                                            </Typography>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate2} {''}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                Ngày khỏi bệnh: {injectionInfo.curedDate2} {""}
+                                                            </Typography>
+                                                        </Stack>
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                {' '}
-                                                                {injectionInfo.infectedNote2 === '' ? (
+                                                                {injectionInfo.infectedNote2 === "" ? (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có{' '}
+                                                                        Ghi chú: Không có
                                                                     </Typography>
                                                                 ) : (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote2}{' '}
+                                                                        Ghi chú: {injectionInfo.infectedNote2}
                                                                     </Typography>
-                                                                )}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                )}
+                                                            </Typography>
+                                                        </Stack>
                                                     </Stack>
-                                                )}{' '}
-                                            </Stack>{' '}
+                                                )}
+                                            </Stack>
                                             <Stack>
-                                                {' '}
-                                                {injectionInfo.infectedDate3 === '' ? (
-                                                    ''
+                                                {injectionInfo.infectedDate3 === "" ? (
+                                                    ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack direction="row" className="addInfo-button" spacing={1}>
+                                                        <Stack
+                                                            direction="row"
+                                                            className="addInfo-button"
+                                                            spacing={1}
+                                                        >
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 3: {injectionInfo.infectedDate3} - {''}{' '}
-                                                            </Typography>{' '}
+                                                                Ngày nhiễm bệnh lần 3:{" "}
+                                                                {injectionInfo.infectedDate3} - {""}
+                                                            </Typography>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate3} {''}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                Ngày khỏi bệnh: {injectionInfo.curedDate3} {""}
+                                                            </Typography>
+                                                        </Stack>
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
-                                                                {' '}
-                                                                {injectionInfo.infectedNote3 === '' ? (
+                                                                {injectionInfo.infectedNote3 === "" ? (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có{' '}
+                                                                        Ghi chú: Không có
                                                                     </Typography>
                                                                 ) : (
                                                                     <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote3}{' '}
+                                                                        Ghi chú: {injectionInfo.infectedNote3}
                                                                     </Typography>
-                                                                )}{' '}
-                                                            </Typography>{' '}
-                                                        </Stack>{' '}
+                                                                )}
+                                                            </Typography>
+                                                        </Stack>
                                                     </Stack>
-                                                )}{' '}
-                                            </Stack>{' '}
+                                                )}
+                                            </Stack>
                                         </Stack>
-                                    )}{' '}
-                                </Stack>{' '}
-                            </Stack>{' '}
+                                    )}
+                                </Stack>
+                            </Stack>
                             <Stack alignItems="center">
-                                <Button sx={{ marginBottom: 5, marginTop: 1 }} variant="contained" type="sumbit">
-                                    Thêm thông tin lây nhiễm{' '}
-                                </Button>{' '}
+                                <Button
+                                    sx={{ marginBottom: 5, marginTop: 1 }}
+                                    variant="contained"
+                                    type="sumbit"
+                                >
+                                    Thêm thông tin lây nhiễm
+                                </Button>
                                 <Stack alignItems="center">
                                     <FormControl variant="outlined" sx={{ m: 1, minWidth: 200 }}>
-                                        <InputLabel id="demo-simple-select-label">Số lần nhiễm bệnh </InputLabel>{' '}
+                                        <InputLabel id="demo-simple-select-label">
+                                            Số lần nhiễm bệnh
+                                        </InputLabel>
                                         <Select
-                                            label={'Số lần nhiễm bệnh'}
+                                            label={"Số lần nhiễm bệnh"}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={(e) => setInfectedTimes(e.target.value)}
                                             value={infectedTimes}
                                         >
                                             <MenuItem value="" disabled>
-                                                Số lần nhiễm bệnh{' '}
-                                            </MenuItem>{' '}
-                                            <MenuItem value="1 lần"> 1 lần </MenuItem> <MenuItem value="2 lần"> 2 lần </MenuItem>{' '}
-                                            <MenuItem value="3 lần"> 3 lần </MenuItem>{' '}
-                                        </Select>{' '}
-                                    </FormControl>{' '}
-                                    {infectedTimes === '1 lần' ? (
+                                                Số lần nhiễm bệnh
+                                            </MenuItem>
+                                            <MenuItem value="1 lần">1 lần</MenuItem>
+                                            <MenuItem value="2 lần">2 lần</MenuItem>
+                                            <MenuItem value="3 lần">3 lần</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    {infectedTimes === "1 lần" ? (
                                         <Stack>
-                                            <Stack spacing={2} direction="row" className="addInfo-button" sx={{ alignItems: 'baseline' }}>
+                                            <Stack
+                                                spacing={2}
+                                                direction="row"
+                                                className="addInfo-button"
+                                                sx={{ alignItems: "baseline" }}
+                                            >
                                                 <TextField
                                                     sx={{ margin: 1, minWidth: 210 }}
                                                     id="standard-basic"
@@ -315,9 +352,14 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                     className="register-dob"
                                                     value={infectedDate1}
                                                     onChange={(e) => setInfectedDate1(e.target.value)}
-                                                />{' '}
-                                            </Stack>{' '}
-                                            <Stack spacing={2} direction="row" className="addInfo-button" sx={{ alignItems: 'baseline' }}>
+                                                />
+                                            </Stack>
+                                            <Stack
+                                                spacing={2}
+                                                direction="row"
+                                                className="addInfo-button"
+                                                sx={{ alignItems: "baseline" }}
+                                            >
                                                 <TextField
                                                     sx={{ margin: 1, minWidth: 210 }}
                                                     id="standard-basic"
@@ -327,9 +369,14 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                     className="register-dob"
                                                     value={curedDate1}
                                                     onChange={(e) => setCuredDate1(e.target.value)}
-                                                />{' '}
-                                            </Stack>{' '}
-                                            <Stack spacing={2} direction="row" className="addInfo-button" sx={{ alignItems: 'baseline' }}>
+                                                />
+                                            </Stack>
+                                            <Stack
+                                                spacing={2}
+                                                direction="row"
+                                                className="addInfo-button"
+                                                sx={{ alignItems: "baseline" }}
+                                            >
                                                 <TextField
                                                     sx={{ margin: 1, minWidth: 210 }}
                                                     id="standard-basic"
@@ -339,19 +386,18 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                     className="addInfo-findWithPhone"
                                                     value={infectedNote1}
                                                     onChange={(e) => setInfectedNote1(e.target.value)}
-                                                />{' '}
-                                            </Stack>{' '}
+                                                />
+                                            </Stack>
                                         </Stack>
                                     ) : (
                                         <Stack>
-                                            {' '}
-                                            {infectedTimes === '2 lần' ? (
+                                            {infectedTimes === "2 lần" ? (
                                                 <Stack>
                                                     <Stack
                                                         spacing={2}
                                                         direction="row"
                                                         className="addInfo-button"
-                                                        sx={{ alignItems: 'baseline' }}
+                                                        sx={{ alignItems: "baseline" }}
                                                     >
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
@@ -362,7 +408,7 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="register-dob"
                                                             value={infectedDate1}
                                                             onChange={(e) => setInfectedDate1(e.target.value)}
-                                                        />{' '}
+                                                        />
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
                                                             id="standard-basic"
@@ -372,13 +418,13 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="register-dob"
                                                             value={infectedDate2}
                                                             onChange={(e) => setInfectedDate2(e.target.value)}
-                                                        />{' '}
-                                                    </Stack>{' '}
+                                                        />
+                                                    </Stack>
                                                     <Stack
                                                         spacing={2}
                                                         direction="row"
                                                         className="addInfo-button"
-                                                        sx={{ alignItems: 'baseline' }}
+                                                        sx={{ alignItems: "baseline" }}
                                                     >
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
@@ -389,7 +435,7 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="register-dob"
                                                             value={curedDate1}
                                                             onChange={(e) => setCuredDate1(e.target.value)}
-                                                        />{' '}
+                                                        />
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
                                                             id="standard-basic"
@@ -399,13 +445,13 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="register-dob"
                                                             value={curedDate2}
                                                             onChange={(e) => setCuredDate2(e.target.value)}
-                                                        />{' '}
-                                                    </Stack>{' '}
+                                                        />
+                                                    </Stack>
                                                     <Stack
                                                         spacing={2}
                                                         direction="row"
                                                         className="addInfo-button"
-                                                        sx={{ alignItems: 'baseline' }}
+                                                        sx={{ alignItems: "baseline" }}
                                                     >
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
@@ -416,7 +462,7 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="addInfo-findWithPhone"
                                                             value={infectedNote1}
                                                             onChange={(e) => setInfectedNote1(e.target.value)}
-                                                        />{' '}
+                                                        />
                                                         <TextField
                                                             id="standard-basic"
                                                             variant="outlined"
@@ -425,19 +471,18 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                             className="addInfo-findWithPhone"
                                                             value={infectedNote2}
                                                             onChange={(e) => setInfectedNote2(e.target.value)}
-                                                        />{' '}
-                                                    </Stack>{' '}
+                                                        />
+                                                    </Stack>
                                                 </Stack>
                                             ) : (
                                                 <Stack>
-                                                    {' '}
-                                                    {infectedTimes === '3 lần' ? (
+                                                    {infectedTimes === "3 lần" ? (
                                                         <Stack>
                                                             <Stack
                                                                 spacing={2}
                                                                 direction="row"
                                                                 className="addInfo-button"
-                                                                sx={{ alignItems: 'baseline' }}
+                                                                sx={{ alignItems: "baseline" }}
                                                             >
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
@@ -447,8 +492,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={infectedDate1}
-                                                                    onChange={(e) => setInfectedDate1(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedDate1(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -457,8 +504,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={infectedDate2}
-                                                                    onChange={(e) => setInfectedDate2(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedDate2(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -467,14 +516,16 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={infectedDate3}
-                                                                    onChange={(e) => setInfectedDate3(e.target.value)}
-                                                                />{' '}
-                                                            </Stack>{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedDate3(e.target.value)
+                                                                    }
+                                                                />
+                                                            </Stack>
                                                             <Stack
                                                                 spacing={2}
                                                                 direction="row"
                                                                 className="addInfo-button"
-                                                                sx={{ alignItems: 'baseline' }}
+                                                                sx={{ alignItems: "baseline" }}
                                                             >
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
@@ -484,8 +535,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={curedDate1}
-                                                                    onChange={(e) => setCuredDate1(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setCuredDate1(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -494,8 +547,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={curedDate2}
-                                                                    onChange={(e) => setCuredDate2(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setCuredDate2(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -504,14 +559,16 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={curedDate3}
-                                                                    onChange={(e) => setCuredDate3(e.target.value)}
-                                                                />{' '}
-                                                            </Stack>{' '}
+                                                                    onChange={(e) =>
+                                                                        setCuredDate3(e.target.value)
+                                                                    }
+                                                                />
+                                                            </Stack>
                                                             <Stack
                                                                 spacing={2}
                                                                 direction="row"
                                                                 className="addInfo-button"
-                                                                sx={{ alignItems: 'baseline' }}
+                                                                sx={{ alignItems: "baseline" }}
                                                             >
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
@@ -521,8 +578,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     label="Ghi chú lần 1"
                                                                     className="addInfo-findWithPhone"
                                                                     value={infectedNote1}
-                                                                    onChange={(e) => setInfectedNote1(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedNote1(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     id="standard-basic"
                                                                     variant="outlined"
@@ -530,8 +589,10 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     label="Ghi chú lần 2"
                                                                     className="addInfo-findWithPhone"
                                                                     value={infectedNote2}
-                                                                    onChange={(e) => setInfectedNote2(e.target.value)}
-                                                                />{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedNote2(e.target.value)
+                                                                    }
+                                                                />
                                                                 <TextField
                                                                     id="standard-basic"
                                                                     variant="outlined"
@@ -539,31 +600,33 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                                                     label="Ghi chú lần 3"
                                                                     className="addInfo-findWithPhone"
                                                                     value={infectedNote3}
-                                                                    onChange={(e) => setInfectedNote3(e.target.value)}
-                                                                />{' '}
-                                                            </Stack>{' '}
+                                                                    onChange={(e) =>
+                                                                        setInfectedNote3(e.target.value)
+                                                                    }
+                                                                />
+                                                            </Stack>
                                                         </Stack>
                                                     ) : (
-                                                        <Stack> </Stack>
-                                                    )}{' '}
+                                                        <Stack></Stack>
+                                                    )}
                                                 </Stack>
-                                            )}{' '}
+                                            )}
                                         </Stack>
-                                    )}{' '}
+                                    )}
                                     <Button
                                         variant="contained"
                                         type="sumbit"
                                         sx={{ marginBottom: 5, marginTop: 2 }}
                                         onClick={submitInfectedInfoHandler}
                                     >
-                                        Gửi{' '}
-                                    </Button>{' '}
-                                </Stack>{' '}
-                            </Stack>{' '}
+                                        Gửi
+                                    </Button>
+                                </Stack>
+                            </Stack>
                         </Stack>
                     ) : (
                         <Stack className="addRole-form">
-                            <Stack spacing={2} alignItems="center">
+                            <Stack spacing={2} alignItems="center" >
                                 <TextField
                                     id="standard-basic"
                                     variant="standard"
@@ -572,26 +635,30 @@ const AddInjectionInfo = ({ userId, setUserId }) => {
                                     className="addInfo-findWithPhone"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                />{' '}
-                                <Button variant="contained" type="sumbit" onClick={findInfoByPhoneHandler}>
-                                    Tìm{' '}
-                                </Button>{' '}
-                            </Stack>{' '}
+                                />
+                                <Button
+                                    variant="contained"
+                                    type="sumbit"
+                                    onClick={findInfoByPhoneHandler}
+                                >
+                                    Tìm
+                                </Button>
+                            </Stack>
                         </Stack>
-                    )}{' '}
+                    )}
                 </Stack>
             ) : (
                 <Stack>
                     <Typography variant="h5" gutterBottom>
-                        Bạn không đủ quyền hạn để truy cập{' '}
-                    </Typography>{' '}
+                        Bạn không đủ quyền hạn để truy cập
+                    </Typography>
                     <Stack>
-                        <Button variant="contained"> Quay lại trang chủ </Button>{' '}
-                    </Stack>{' '}
+                        <Button variant="contained">Quay lại trang chủ</Button>
+                    </Stack>
                 </Stack>
-            )}{' '}
+            )}
         </Stack>
     );
 };
 
-export default AddInjectionInfo;
+export default AddInjectionInfo

@@ -22,10 +22,9 @@ const other = {
             id: 'confirm_change',
             title: 'Xác nhận thông tin khai báo',
             type: 'item',
-            url: 'https://codedthemes.gitbook.io/berry/',
+            url: '/admin/confirm-change',
             icon: icons.IconChecklist,
-            external: true,
-            target: true
+            breadcrumbs: false
         },
         {
             id: 'edit',
