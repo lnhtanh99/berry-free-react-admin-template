@@ -216,8 +216,8 @@ const Main = () => {
               {injectionInfo && (
                 <>
                   {!injectionInfo.dataSubmitted ? (
-                    <Stack>
-                      <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                    <Stack sx={{ height: '80vh', textAlign: 'center' }}>
+                      <Typography variant="h4" >
                         Chưa có dữ liệu tiêm chủng của bạn
                       </Typography>
                       <Typography>

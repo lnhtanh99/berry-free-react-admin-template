@@ -112,7 +112,7 @@ const AddRole = () => {
                             <TextField
                                 className={classes.textField}
                                 label="Họ và tên:"
-                                defaultValue={userInfo.name}
+                                value={userInfo.name}
                                 InputProps={{
                                     readOnly: true,
                                 }}
@@ -122,7 +122,7 @@ const AddRole = () => {
                             <TextField
                                 className={classes.textField}
                                 label="Vai trò:"
-                                defaultValue={userInfo.assignedRole}
+                                value={userInfo.assignedRole}
                                 InputProps={{
                                     readOnly: true,
                                 }}
@@ -172,16 +172,16 @@ const AddRole = () => {
                         </CardContent>
                     )
                 ) : (
-                    <div>
+                    <CardContent>
                         <div>
-                            <Typography variant="subtitle1" gutterBottom>
+                            <Typography variant="subtitle1" gutterBottom sx={{ color: 'red' }}>
                                 Bạn không đủ quyền hạn để truy cập{' '}
                             </Typography>{' '}
                         </div>{' '}
                         <Button variant="contained" onClick={backToMainPagehandler}>
                             Quay lại trang chủ{' '}
                         </Button>{' '}
-                    </div>
+                    </CardContent>
                 )}{' '}
             </Card>
         </Container>

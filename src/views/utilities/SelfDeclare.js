@@ -55,6 +55,8 @@ const SelfDeclare = () => {
   const [injectionId, setInjectionId] = useState("");
   const [authInfo, setAuthInfo] = useState('');
 
+  const [isCurrentlyInfected, setIsCurrentlyInfected] = useState(false);
+
   const useStyles = makeStyles((theme) => ({
     header: {
       marginBottom: '30px',
@@ -185,7 +187,7 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Họ và tên:"
-                    defaultValue={authInfo.name}
+                    value={authInfo.name}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -194,7 +196,7 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Ngày tháng năm sinh:"
-                    defaultValue={authInfo.dob}
+                    value={authInfo.dob}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -203,7 +205,7 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Số mũi đã tiêm:"
-                    defaultValue={declareRefInfo.numberOfInjections}
+                    value={declareRefInfo.numberOfInjections}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -212,7 +214,7 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 1:"
-                    defaultValue={declareRefInfo.firstDose}
+                    value={declareRefInfo.firstDose}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -221,7 +223,7 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 2:"
-                    defaultValue={declareRefInfo.secondDose}
+                    value={declareRefInfo.secondDose}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -230,12 +232,28 @@ const SelfDeclare = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 3:"
-                    defaultValue={declareRefInfo.thirdDose}
+                    value={declareRefInfo.thirdDose}
                     InputProps={{
                       readOnly: true,
                     }}
                     fullWidth
                   />
+                  <FormControl variant="outlined" sx={{ m: 1, minWidth: 200 }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Tình trạng nhiễm bệnh hiện tại
+                    </InputLabel>
+                    <Select
+                      label={"Tình trạng nhiễm bệnh hiện tại"}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      onChange={(e) => setIsCurrentlyInfected(e.target.value)}
+                      value={isCurrentlyInfected}
+                    >
+                      <MenuItem value="true">Có</MenuItem>
+                      <MenuItem value="false">Không</MenuItem>
+                    </Select>
+                  </FormControl>
+
                   <Stack>
                     <Typography variant="h6" gutterBottom>
                       Lịch sử lây nhiễm
@@ -253,7 +271,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày nhiễm bệnh lần 1:"
-                              defaultValue={declareRefInfo.infectedDate1}
+                              value={declareRefInfo.infectedDate1}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -262,7 +280,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày khỏi bệnh:"
-                              defaultValue={declareRefInfo.curedDate1}
+                              value={declareRefInfo.curedDate1}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -273,7 +291,7 @@ const SelfDeclare = () => {
                                 <TextField
                                   className={classes.textField}
                                   label="Ghi chú"
-                                  defaultValue="Không có"
+                                  value="Không có"
                                   InputProps={{
                                     readOnly: true,
                                   }}
@@ -283,7 +301,7 @@ const SelfDeclare = () => {
                                 <TextField
                                   className={classes.textField}
                                   label="Ghi chú:"
-                                  defaultValue={declareRefInfo.infectedNote1}
+                                  value={declareRefInfo.infectedNote1}
                                   InputProps={{
                                     readOnly: true,
                                   }}
@@ -300,7 +318,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày nhiễm bệnh lần 2:"
-                              defaultValue={declareRefInfo.infectedDate2}
+                              value={declareRefInfo.infectedDate2}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -309,7 +327,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày khỏi bệnh:"
-                              defaultValue={declareRefInfo.curedDate2}
+                              value={declareRefInfo.curedDate2}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -329,7 +347,7 @@ const SelfDeclare = () => {
                                 <TextField
                                   className={classes.textField}
                                   label="Ghi chú:"
-                                  defaultValue={declareRefInfo.infectedNote2}
+                                  value={declareRefInfo.infectedNote2}
                                   InputProps={{
                                     readOnly: true,
                                   }}
@@ -346,7 +364,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày nhiễm bệnh lần 2:"
-                              defaultValue={declareRefInfo.infectedDate3}
+                              value={declareRefInfo.infectedDate3}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -355,7 +373,7 @@ const SelfDeclare = () => {
                             <TextField
                               className={classes.textField}
                               label="Ngày khỏi bệnh:"
-                              defaultValue={declareRefInfo.curedDate3}
+                              value={declareRefInfo.curedDate3}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -375,7 +393,7 @@ const SelfDeclare = () => {
                                 <TextField
                                   className={classes.textField}
                                   label="Ghi chú:"
-                                  defaultValue={declareRefInfo.infectedNote3}
+                                  value={declareRefInfo.infectedNote3}
                                   InputProps={{
                                     readOnly: true,
                                   }}

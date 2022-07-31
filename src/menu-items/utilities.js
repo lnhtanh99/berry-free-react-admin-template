@@ -57,15 +57,6 @@ const utilities = {
             icon: icons.IconWriting,
             breadcrumbs: false
         },
-        {
-            id: 'register',
-            title: 'Register',
-            type: 'item',
-            url: '/utils/register',
-            icon: icons.IconWriting,
-            breadcrumbs: false
-        },
-
     ]
 };
 

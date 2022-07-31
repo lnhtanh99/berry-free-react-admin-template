@@ -57,10 +57,10 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={8}>
-                        <TotalGrowthBarChart everydayCases={everydayCases} isLoading={isLoading} />
+                        <PopularCard isLoading={isLoading} />
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <PopularCard isLoading={isLoading} />
+                        <TotalGrowthBarChart everydayCases={everydayCases} isLoading={isLoading} />
                     </Grid>
                 </Grid>
             </Grid>

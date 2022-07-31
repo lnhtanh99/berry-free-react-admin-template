@@ -206,7 +206,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Họ và tên:"
-                    defaultValue={userInfo.name}
+                    value={userInfo.name}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -215,7 +215,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Ngày tháng năm sinh:"
-                    defaultValue={userInfo.dob}
+                    value={userInfo.dob}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -224,7 +224,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Số mũi đã tiêm:"
-                    defaultValue={injectionInfo.numberOfInjections}
+                    value={injectionInfo.numberOfInjections}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -233,7 +233,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 1:"
-                    defaultValue={injectionInfo.firstDose}
+                    value={injectionInfo.firstDose}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -242,7 +242,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 2:"
-                    defaultValue={injectionInfo.secondDose}
+                    value={injectionInfo.secondDose}
                     InputProps={{
                       readOnly: true,
                     }}
@@ -251,7 +251,7 @@ const AddInfo = () => {
                   <TextField
                     className={classes.textField}
                     label="Mũi số 3:"
-                    defaultValue={injectionInfo.thirdDose}
+                    value={injectionInfo.thirdDose}
                     InputProps={{
                       readOnly: true,
                     }}

@@ -49,6 +49,8 @@ const AddInjectionInfo = () => {
     const [injectionInfo, setInjectionInfo] = useState({});
     const [injectionId, setInjectionId] = useState("");
 
+    const [isCurrentlyInfected, setIsCurrentlyInfected] = useState(false);
+
     const useStyles = makeStyles((theme) => ({
         header: {
             marginBottom: '30px',
@@ -183,7 +185,7 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Họ và tên:"
-                                        defaultValue={userInfo.name}
+                                        value={userInfo.name}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -192,7 +194,7 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Ngày tháng năm sinh:"
-                                        defaultValue={userInfo.dob}
+                                        value={userInfo.dob}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -201,7 +203,7 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Số mũi đã tiêm:"
-                                        defaultValue={injectionInfo.numberOfInjections}
+                                        value={injectionInfo.numberOfInjections}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -210,7 +212,7 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Mũi số 1:"
-                                        defaultValue={injectionInfo.firstDose}
+                                        value={injectionInfo.firstDose}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -219,7 +221,7 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Mũi số 2:"
-                                        defaultValue={injectionInfo.secondDose}
+                                        value={injectionInfo.secondDose}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -228,12 +230,27 @@ const AddInjectionInfo = () => {
                                     <TextField
                                         className={classes.textField}
                                         label="Mũi số 3:"
-                                        defaultValue={injectionInfo.thirdDose}
+                                        value={injectionInfo.thirdDose}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         fullWidth
                                     />
+                                    <FormControl variant="outlined" sx={{ m: 1, minWidth: 200 }}>
+                                        <InputLabel id="demo-simple-select-label">
+                                            Tình trạng nhiễm bệnh hiện tại
+                                        </InputLabel>
+                                        <Select
+                                            label={"Tình trạng nhiễm bệnh hiện tại"}
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={(e) => setIsCurrentlyInfected(e.target.value)}
+                                            value={isCurrentlyInfected}
+                                        >
+                                            <MenuItem value="true">Có</MenuItem>
+                                            <MenuItem value="false">Không</MenuItem>
+                                        </Select>
+                                    </FormControl>
 
                                     <Stack>
                                         <Typography variant="h4" gutterBottom>
@@ -253,7 +270,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày nhiễm bệnh lần 1:"
-                                                            defaultValue={injectionInfo.infectedDate1}
+                                                            value={injectionInfo.infectedDate1}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -262,7 +279,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày khỏi bệnh:"
-                                                            defaultValue={injectionInfo.curedDate1}
+                                                            value={injectionInfo.curedDate1}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -274,7 +291,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue="Không có"
+                                                                        value="Không có"
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}
@@ -284,7 +301,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue={injectionInfo.infectedNote1}
+                                                                        value={injectionInfo.infectedNote1}
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}
@@ -304,7 +321,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày nhiễm bệnh lần 2:"
-                                                            defaultValue={injectionInfo.infectedDate2}
+                                                            value={injectionInfo.infectedDate2}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -313,7 +330,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày khỏi bệnh:"
-                                                            defaultValue={injectionInfo.curedDate2}
+                                                            value={injectionInfo.curedDate2}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -325,7 +342,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue="Không có"
+                                                                        value="Không có"
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}
@@ -335,7 +352,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue={injectionInfo.infectedNote2}
+                                                                        value={injectionInfo.infectedNote2}
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}
@@ -355,7 +372,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày nhiễm bệnh lần 3:"
-                                                            defaultValue={injectionInfo.infectedDate3}
+                                                            value={injectionInfo.infectedDate3}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -364,7 +381,7 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             className={classes.textField}
                                                             label="Ngày khỏi bệnh:"
-                                                            defaultValue={injectionInfo.curedDate3}
+                                                            value={injectionInfo.curedDate3}
                                                             InputProps={{
                                                                 readOnly: true,
                                                             }}
@@ -376,7 +393,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue="Không có"
+                                                                        value="Không có"
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}
@@ -386,7 +403,7 @@ const AddInjectionInfo = () => {
                                                                     <TextField
                                                                         className={classes.textField}
                                                                         label="Ghi chú"
-                                                                        defaultValue={injectionInfo.infectedNote3}
+                                                                        value={injectionInfo.infectedNote3}
                                                                         InputProps={{
                                                                             readOnly: true,
                                                                         }}

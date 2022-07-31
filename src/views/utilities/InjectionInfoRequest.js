@@ -56,6 +56,14 @@ const InjectionInfoRequest = () => {
   }));
 
   const classes = useStyles();
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setIsLoggedIn(currentUser);
+      setUserEmail(currentUser.email);
+    } else {
+      setIsLoggedIn(null);
+    }
+  });
 
   const submitInfoHanlder = (e) => {
     e.preventDefault();
@@ -100,15 +108,6 @@ const InjectionInfoRequest = () => {
 
   useEffect(() => {
     // firebase
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setIsLoggedIn(currentUser);
-        setUserEmail(currentUser.email);
-      } else {
-        setIsLoggedIn(null);
-      }
-    });
-
     onSnapshot(dataRef, orderBy("name", "desc"), (snapshot) => {
       let users = [];
       snapshot.docs.forEach((doc) => {
@@ -257,6 +256,7 @@ const InjectionInfoRequest = () => {
                   />
                   <TextField
                     sx={{ marginTop: 1, minWidth: 210 }}
+                    autoComplete='off'
                     id="standard-basic"
                     variant="outlined"
                     type="text"
@@ -307,6 +307,7 @@ const InjectionInfoRequest = () => {
                     id="standard-basic"
                     variant="outlined"
                     type="text"
+                    autoComplete='off'
                     label="Đơn vị tiêm mũi 2"
                     className="addInfo-findWithPhone"
                     value={injectPerson2}
@@ -353,6 +354,7 @@ const InjectionInfoRequest = () => {
                     id="standard-basic"
                     variant="outlined"
                     type="text"
+                    autoComplete='off'
                     label="Đơn vị tiêm mũi 3"
                     className="addInfo-findWithPhone"
                     value={injectPerson3}

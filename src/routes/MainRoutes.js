@@ -29,6 +29,10 @@ const MainRoutes = {
     element: <MainLayout />,
     children: [
         {
+            path: '/register',
+            element: <Register />
+        },
+        {
             path: '/',
             element: <DashboardDefault />
         },
@@ -92,15 +96,6 @@ const MainRoutes = {
                 {
                     path: 'request-change',
                     element: <RequestChange />
-                }
-            ]
-        },
-        {
-            path: 'utils',
-            children: [
-                {
-                    path: 'register',
-                    element: <Register />
                 }
             ]
         },

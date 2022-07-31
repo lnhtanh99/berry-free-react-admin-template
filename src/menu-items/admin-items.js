@@ -4,8 +4,8 @@ import other from './other';
 
 // ==============================|| MENU ITEMS ||============================== //
 
-const menuItems = {
-    items: [dashboard]
+const adminItems = {
+    items: [dashboard, utilities, other]
 };
 
-export default menuItems;
+export default adminItems;

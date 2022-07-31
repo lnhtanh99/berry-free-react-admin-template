@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -32,7 +32,6 @@ import {
 import { auth, queryGetUserInfoByEmail, dataRef } from "../../../../firebase/firebase";
 import { onSnapshot, doc, setDoc, orderBy } from "@firebase/firestore";
 
-
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
@@ -43,9 +42,11 @@ import Transitions from 'ui-component/extended/Transitions';
 // assets
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
 
+import { AdminContext } from '../../../../context/adminContext';
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
+    const { setIsUser, setIsAdmin } = useContext(AdminContext);
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const navigate = useNavigate();
@@ -66,11 +67,11 @@ const ProfileSection = () => {
 
     const loginHandler = (e) => {
         e.preventDefault();
+
         signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 const user = result.user;
-                console.log(auth);
             })
             .catch((error) => {
                 console.log(error);
@@ -110,6 +111,7 @@ const ProfileSection = () => {
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
+                setIsUser(true);
                 setIsLoggedIn(currentUser);
                 setUserEmail(currentUser.email);
                 onSnapshot(queryGetUserInfoByEmail(userEmail), (snapshot) => {
@@ -118,6 +120,8 @@ const ProfileSection = () => {
                 setCurrentUser(currentUser);
             } else {
                 setIsLoggedIn(null);
+                setIsUser(false);
+                setIsAdmin(false);
             }
         });
 
@@ -142,7 +146,7 @@ const ProfileSection = () => {
                 snapshot.forEach((data) => setUserInfo(data.data()));
             });
         }
-        
+
     }, [open, isLoggedIn]);
 
     return (
@@ -169,7 +173,7 @@ const ProfileSection = () => {
                 }}
                 icon={
                     <Avatar
-                        src={ currentUser ? currentUser.photoURL : null }
+                        src={currentUser ? currentUser.photoURL : null}
                         sx={{
                             ...theme.typography.mediumAvatar,
                             margin: '8px 0 8px 8px !important',
@@ -219,10 +223,10 @@ const ProfileSection = () => {
                                                     <>
                                                         <Typography variant="h4">Good Morning,</Typography>
                                                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                            { userInfo.name }
+                                                            {userInfo.name}
                                                         </Typography>
                                                     </>
-                                                    : 
+                                                    :
                                                     <>
                                                         <Typography variant="h4">Please login</Typography>
                                                     </>
