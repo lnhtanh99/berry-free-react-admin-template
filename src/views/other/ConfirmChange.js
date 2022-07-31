@@ -122,7 +122,6 @@ const ConfirmChange = () => {
       onSnapshot(
         queryGetUserInfoByPhone(injectionRequestRef, phone),
         (snapshot) => {
-          console.log(snapshot._snapshot.docChanges.length);
           if (snapshot._snapshot.docChanges.length === 0) {
             setAlertmsg("Không có thông tin cho người dùng này");
           }
@@ -174,19 +173,18 @@ const ConfirmChange = () => {
 
   return (
     <Container className="container addInfo" sx={{ alignItems: "center" }}>
-      {" "}
       {userRole === "admin" || userRole === "moderator" ? (
         <Card>
           {requestInfo ? (
-            <CardContent>
-              <Typography variant="h4" gutterBottom>
+            <CardContent sx={{ textAlign: "center" }}>
+              <Typography variant="h3" className={classes.header} gutterBottom>
                 Thông tin yêu cầu thay đổi
               </Typography>
               <Typography>Người yêu cầu: {requestInfo?.name}</Typography>
 
               <Grid container spacing={2}>
                 <Grid item sm={6}>
-                  <Typography variant="subtitle1">Dữ liệu trên máy chủ</Typography>
+                  <Typography variant="subtitle1" gutterBottom>Dữ liệu trên máy chủ</Typography>
                   {injectInfo?.numberOfInjections === "" ? (
                     <TextField
                       className={classes.textField}
@@ -279,200 +277,385 @@ const ConfirmChange = () => {
                       variant="outlined"
                     />
                   )}
-                  <Typography>
-                    {injectInfo?.secondDose === "" ? (
-                      <Typography>Mũi số 2: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 2: {injectInfo?.secondDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {" "}
-                    {injectInfo?.injectDate2 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 2: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 2: {injectInfo?.injectDate2}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.injectPerson2 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 2: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 2: {injectInfo?.injectPerson2}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.thirdDose === "" ? (
-                      <Typography>Mũi số 3: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 3: {injectInfo?.thirdDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.injectDate3 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 3: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 3: {injectInfo?.injectDate3}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.injectPerson3 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 3: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 3: {injectInfo?.injectPerson3}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
+                  {injectInfo?.secondDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 2: "
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 2: "
+                      defaultValue={injectInfo?.secondDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectDate2 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 2: "
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 2: "
+                      defaultValue={injectInfo?.injectDate2}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectPerson2 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 2: "
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 2: "
+                      defaultValue={injectInfo?.injectPerson2}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.thirdDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 3: "
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 3: "
+                      defaultValue={injectInfo?.thirdDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectDate3 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label=" Ngày tiêm mũi 3:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label=" Ngày tiêm mũi 3: "
+                      defaultValue={injectInfo?.injectDate3}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectPerson3 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 3:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 3: "
+                      defaultValue={injectInfo?.injectPerson3}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
                 </Grid>
                 <Grid item sm={6}>
-                  <Typography>Yêu cầu thay đổi</Typography>
-                  <Typography>
-                    {" "}
-                    {requestInfo?.numberOfInjections === "" ? (
-                      <TextField
-                        className={classes.textField}
-                        label="Số mũi đã tiêm:"
-                        defaultValue="Chưa có thông tin"
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        fullWidth
-                        variant="outlined"
-                      />
-                    ) : (
-                      <TextField
-                        className={classes.textField}
-                        label="Số mũi đã tiêm:"
-                        defaultValue={requestInfo?.numberOfInjections}
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        fullWidth
-                        variant="outlined"
-                      />
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.firstDose === "" ? (
-                      <Typography>Mũi số 1: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 1: {requestInfo?.firstDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.injectDate1 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 1: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 1: {requestInfo?.injectDate1}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.injectPerson1 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 1: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 1: {requestInfo?.injectPerson1}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.secondDose === "" ? (
-                      <Typography>Mũi số 2: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 2: {requestInfo?.secondDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {" "}
-                    {requestInfo?.injectDate2 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 2: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 2: {requestInfo?.injectDate2}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.injectPerson2 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 2: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 2: {requestInfo?.injectPerson2}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.thirdDose === "" ? (
-                      <Typography>Mũi số 3: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 3: {requestInfo?.thirdDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.injectDate3 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 3: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 3: {requestInfo?.injectDate3}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {requestInfo?.injectPerson3 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 3: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 3: {requestInfo?.injectPerson3}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>Yêu cầu thay đổi</Typography>
+                  {requestInfo?.numberOfInjections === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Số mũi đã tiêm:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Số mũi đã tiêm:"
+                      defaultValue={requestInfo?.numberOfInjections}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.firstDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 1:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 1:"
+                      defaultValue={requestInfo?.firstDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectDate1 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 1:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 1:"
+                      defaultValue={requestInfo?.injectDate1}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectPerson1 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 1:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 1:"
+                      defaultValue={requestInfo?.injectPerson1}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.secondDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 2:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 2:"
+                      defaultValue={requestInfo?.secondDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectDate2 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 2:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 2:"
+                      defaultValue={requestInfo?.injectDate2}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectPerson2 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label=" Đơn vị tiêm mũi 2:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label=" Đơn vị tiêm mũi 2:"
+                      defaultValue={requestInfo?.injectPerson2}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.thirdDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 3:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 3:"
+                      defaultValue={requestInfo?.thirdDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectDate3 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 3:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 3:"
+                      defaultValue={requestInfo?.injectDate3}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {requestInfo?.injectPerson3 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label=" Đơn vị tiêm mũi 3:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label=" Đơn vị tiêm mũi 3:"
+                      defaultValue={requestInfo?.injectPerson3}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
                   {/* <img src={requestInfo?.imageProof}></img> */}
                 </Grid>
               </Grid>
-              <Stack sx={{ marginTop: 3 }}>
+              <Button sx={{ marginTop: 3 }} variant="outlined">
                 <Link href={requestInfo?.imageProof} target="blank">
                   Hình ảnh minh chứng
                 </Link>
-              </Stack>
+              </Button>
               <Stack
                 direction="row"
                 spacing={10}
@@ -483,6 +666,7 @@ const ConfirmChange = () => {
                     variant="contained"
                     type="sumbit"
                     onClick={handleConfirm}
+                    color="success"
                   >
                     Chấp thuận
                   </Button>
@@ -492,6 +676,7 @@ const ConfirmChange = () => {
                     variant="contained"
                     type="sumbit"
                     onClick={handleClickOpen}
+                    color="error"
                   >
                     Từ chối
                   </Button>
@@ -540,7 +725,7 @@ const ConfirmChange = () => {
                   >
                     Tìm
                   </Button>
-                  <Stack>{alertmsg}</Stack>
+                  <Stack sx={{ color: 'red' }}>{alertmsg}</Stack>
                 </Stack>
               </Stack>
             </CardContent>
@@ -549,7 +734,7 @@ const ConfirmChange = () => {
       ) : (
         <Card>
           <CardContent>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" gutterBottom sx={{ color: 'red' }}>
               Bạn không đủ quyền hạn để truy cập
             </Typography>
             <Stack>

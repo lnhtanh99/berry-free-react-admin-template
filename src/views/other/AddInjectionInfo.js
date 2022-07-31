@@ -680,8 +680,6 @@ const AddInjectionInfo = () => {
                                     </Stack>
                                 </Grid>
                             </Grid>
-
-
                         </CardContent>
                     ) : (
                         <CardContent className="addRole-form">
