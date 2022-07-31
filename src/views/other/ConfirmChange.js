@@ -12,22 +12,10 @@ import {
 } from "../../firebase/firebase";
 import { onSnapshot, doc, setDoc, orderBy, addDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import Typography from "@mui/material/Typography";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Link from "@mui/material/Link";
+import { Container, Card, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, CardContent, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-export const ConfirmChange = () => {
+const ConfirmChange = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [userRole, setUserRole] = useState("");
   const [authInfo, setAuthInfo] = useState(null);
@@ -58,6 +46,16 @@ export const ConfirmChange = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const useStyles = makeStyles((theme) => ({
+    header: {
+      marginBottom: '30px'
+    },
+    textField: {
+      marginBottom: '38px'
+    }
+  }));
+  const classes = useStyles();
 
   const handleConfirm = (e) => {
     e.preventDefault();
@@ -172,72 +170,115 @@ export const ConfirmChange = () => {
         });
       });
     }
-    console.log(requestInfo);
   }, [isLoggedIn, requestInfo, injectInfo]);
 
   return (
-    <Stack className="container addInfo" sx={{ alignItems: "center" }}>
+    <Container className="container addInfo" sx={{ alignItems: "center" }}>
       {" "}
       {userRole === "admin" || userRole === "moderator" ? (
-        <Stack>
+        <Card>
           {requestInfo ? (
-            <Stack>
-              <Stack>
-                <Typography variant="h4" gutterBottom>
-                  Thông tin yêu cầu thay đổi
-                </Typography>
-              </Stack>
-              <Stack>
-                <Typography>Người yêu cầu: {requestInfo?.name}</Typography>
-              </Stack>
-              <Stack
-                direction="row"
-                spacing={10}
-                sx={{ justifyContent: "center" }}
-              >
-                <Stack>
-                  <Typography>Dữ liệu trên máy chủ</Typography>
-                  <Typography>
-                    {" "}
-                    {injectInfo?.numberOfInjections === "" ? (
-                      <Typography>Số mũi đã tiêm: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Số mũi đã tiêm: {injectInfo?.numberOfInjections}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.firstDose === "" ? (
-                      <Typography>Mũi số 1: Chưa có thông tin</Typography>
-                    ) : (
-                      <Typography>
-                        Mũi số 1: {injectInfo?.firstDose}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.injectDate1 === "" ? (
-                      <Typography>
-                        Ngày tiêm mũi 1: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Ngày tiêm mũi 1: {injectInfo?.injectDate1}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
-                  <Typography>
-                    {injectInfo?.injectPerson1 === "" ? (
-                      <Typography>
-                        Đơn vị tiêm mũi 1: Chưa có thông tin
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        Đơn vị tiêm mũi 1: {injectInfo?.injectPerson1}{" "}
-                      </Typography>
-                    )}
-                  </Typography>
+            <CardContent>
+              <Typography variant="h4" gutterBottom>
+                Thông tin yêu cầu thay đổi
+              </Typography>
+              <Typography>Người yêu cầu: {requestInfo?.name}</Typography>
+
+              <Grid container spacing={2}>
+                <Grid item sm={6}>
+                  <Typography variant="subtitle1">Dữ liệu trên máy chủ</Typography>
+                  {injectInfo?.numberOfInjections === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Số mũi đã tiêm:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Số mũi đã tiêm:"
+                      defaultValue={injectInfo?.numberOfInjections}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.firstDose === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 1:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Mũi số 1:"
+                      defaultValue={injectInfo?.firstDose}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectDate1 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 1:"
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Ngày tiêm mũi 1:"
+                      defaultValue={injectInfo?.injectDate1}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
+                  {injectInfo?.injectPerson1 === "" ? (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 1: "
+                      defaultValue="Chưa có thông tin"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  ) : (
+                    <TextField
+                      className={classes.textField}
+                      label="Đơn vị tiêm mũi 1: "
+                      defaultValue={injectInfo?.injectPerson1}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                    />
+                  )}
                   <Typography>
                     {injectInfo?.secondDose === "" ? (
                       <Typography>Mũi số 2: Chưa có thông tin</Typography>
@@ -301,17 +342,33 @@ export const ConfirmChange = () => {
                       </Typography>
                     )}
                   </Typography>
-                </Stack>
-                <Stack>
+                </Grid>
+                <Grid item sm={6}>
                   <Typography>Yêu cầu thay đổi</Typography>
                   <Typography>
                     {" "}
                     {requestInfo?.numberOfInjections === "" ? (
-                      <Typography>Số mũi đã tiêm: Chưa có thông tin</Typography>
+                      <TextField
+                        className={classes.textField}
+                        label="Số mũi đã tiêm:"
+                        defaultValue="Chưa có thông tin"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        fullWidth
+                        variant="outlined"
+                      />
                     ) : (
-                      <Typography>
-                        Số mũi đã tiêm: {requestInfo?.numberOfInjections}{" "}
-                      </Typography>
+                      <TextField
+                        className={classes.textField}
+                        label="Số mũi đã tiêm:"
+                        defaultValue={requestInfo?.numberOfInjections}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        fullWidth
+                        variant="outlined"
+                      />
                     )}
                   </Typography>
                   <Typography>
@@ -409,8 +466,8 @@ export const ConfirmChange = () => {
                     )}
                   </Typography>
                   {/* <img src={requestInfo?.imageProof}></img> */}
-                </Stack>
-              </Stack>
+                </Grid>
+              </Grid>
               <Stack sx={{ marginTop: 3 }}>
                 <Link href={requestInfo?.imageProof} target="blank">
                   Hình ảnh minh chứng
@@ -462,9 +519,9 @@ export const ConfirmChange = () => {
                   </Dialog>
                 </Stack>
               </Stack>
-            </Stack>
+            </CardContent>
           ) : (
-            <Stack>
+            <CardContent>
               <Stack className="addRole-form">
                 <Stack spacing={2}>
                   <TextField
@@ -486,21 +543,23 @@ export const ConfirmChange = () => {
                   <Stack>{alertmsg}</Stack>
                 </Stack>
               </Stack>
-            </Stack>
+            </CardContent>
           )}
-        </Stack>
+        </Card>
       ) : (
-        <Stack>
-          <Stack>
+        <Card>
+          <CardContent>
             <Typography variant="h5" gutterBottom>
               Bạn không đủ quyền hạn để truy cập
             </Typography>
             <Stack>
               <Button variant="contained">Quay lại trang chủ</Button>
             </Stack>
-          </Stack>{" "}
-        </Stack>
+          </CardContent>
+        </Card>
       )}
-    </Stack>
+    </Container>
   );
 };
+
+export default ConfirmChange

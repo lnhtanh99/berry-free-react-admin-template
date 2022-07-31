@@ -177,7 +177,7 @@ const SelfDeclare = () => {
         <Card>
           {declareRefInfo ? (
             <CardContent sx={{ textAlign: "center" }}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} >
                 <Grid item sm={6}>
                   <Typography variant="h4" className={classes.header} gutterBottom>
                     Thông tin người dùng
@@ -272,7 +272,8 @@ const SelfDeclare = () => {
                               {declareRefInfo.infectedNote1 === "" ? (
                                 <TextField
                                   className={classes.textField}
-                                  label="Không có"
+                                  label="Ghi chú"
+                                  defaultValue="Không có"
                                   InputProps={{
                                     readOnly: true,
                                   }}
@@ -455,7 +456,7 @@ const SelfDeclare = () => {
                       <Stack>
                         {infectedTimes === "2 lần" ? (
                           <Grid container spacing={2}>
-                            <Grid item sm={6}>
+                            <Grid item lg={6}>
                               <Box className={`${classes.box} ${classes.infected1}`}>
                                 <TextField
                                   sx={{ margin: 1, minWidth: 210 }}
@@ -489,7 +490,7 @@ const SelfDeclare = () => {
                                 />
                               </Box>
                             </Grid>
-                            <Grid item sm={6}>
+                            <Grid item lg={6}>
                               <Box className={`${classes.box} ${classes.infected2}`}>
                                 <TextField
                                   sx={{ margin: 1, minWidth: 210 }}
@@ -529,7 +530,7 @@ const SelfDeclare = () => {
                             {infectedTimes === "3 lần" ? (
                               <Grid container sx={{ justifyContent: 'center' }}>
                                 <Box className={`${classes.box} ${classes.infected1}`}>
-                                  <Grid item lg={6}>
+                                  <Grid item>
                                     <TextField
                                       sx={{ margin: 1, minWidth: 210 }}
                                       id="standard-basic"
@@ -569,7 +570,7 @@ const SelfDeclare = () => {
                                   </Grid>
                                 </Box>
                                 <Box className={`${classes.box} ${classes.infected2}`}>
-                                  <Grid item lg={6}>
+                                  <Grid item>
                                     <TextField
                                       sx={{ margin: 1, minWidth: 210 }}
                                       id="standard-basic"
@@ -609,7 +610,7 @@ const SelfDeclare = () => {
                                   </Grid>
                                 </Box>
                                 <Box className={`${classes.box} ${classes.infected3}`}>
-                                  <Grid item lg={6}>
+                                  <Grid item>
                                     <TextField
                                       sx={{ margin: 1, minWidth: 210 }}
                                       id="standard-basic"

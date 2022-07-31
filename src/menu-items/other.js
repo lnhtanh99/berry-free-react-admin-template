@@ -34,14 +34,14 @@ const other = {
             children: [
                 {
                     id: 'add-injection-info',
-                    title: 'Thông tin tiêm chủng',
+                    title: 'Thông tin lây nhiễm',
                     type: 'item',
                     url: '/admin/add-injection-info',
                     breadcrumbs: false
                 },
                 {
                     id: 'material-icons',
-                    title: 'Thông tin lây nhiễm',
+                    title: 'Thông tin tiêm chủng',
                     type: 'item',
                     url: '/admin/add-info',
                     breadcrumbs: false

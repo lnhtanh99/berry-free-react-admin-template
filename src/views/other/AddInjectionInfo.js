@@ -16,14 +16,10 @@ import {
 } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import Typography from "@mui/material/Typography";
+
+import { Container, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Card, CardContent, Grid, Box } from "@mui/material";
+
+import { makeStyles } from "@mui/styles";
 
 const AddInjectionInfo = () => {
     const [phone, setPhone] = useState("");
@@ -53,6 +49,34 @@ const AddInjectionInfo = () => {
     const [injectionInfo, setInjectionInfo] = useState({});
     const [injectionId, setInjectionId] = useState("");
 
+    const useStyles = makeStyles((theme) => ({
+        header: {
+            marginBottom: '30px',
+            textTransform: 'uppercase',
+        },
+        textField: {
+            marginBottom: '22px'
+        },
+        box: {
+            border: '2px solid black',
+            borderRadius: '10px',
+            boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.4)',
+            padding: '10px 0',
+            margin: '10px 0',
+        },
+        infected1: {
+            backgroundColor: '#dff9fb',
+        },
+        infected2: {
+            backgroundColor: '#dcdde1'
+        },
+        infected3: {
+            backgroundColor: '#fab1a0'
+        }
+    }));
+
+    const classes = useStyles();
+
     onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
             setUserEmail(currentUser.email);
@@ -66,7 +90,6 @@ const AddInjectionInfo = () => {
         e.preventDefault();
         if (totalUserInfo) {
             onSnapshot(queryGetUserInfoByPhone(injectionRef, phone), (snapshot) => {
-                console.log(snapshot._snapshot.docChanges.length);
                 if (snapshot._snapshot.docChanges.length === 0) {
                     //due to changes in Register, this may no longer useful
                     if (
@@ -144,261 +167,270 @@ const AddInjectionInfo = () => {
             });
             setTotalUserInfo(users);
         });
-        console.log(totalInjectionInfo);
     }, [userId, userEmail]);
 
     return (
-        <Stack className="container addInfo">
+        <Container className="container addInfo">
             {userRole === "admin" || userRole === "moderator" ? (
-                <Stack>
+                <Card>
                     {userInfo ? (
-                        <Stack>
-                            <Stack>
-                                <Stack>
-                                    <Typography variant="h4" gutterBottom>
+                        <CardContent sx={{ textAlign: "center" }}>
+                            <Grid container spacing={2}>
+                                <Grid item sm={6}>
+                                    <Typography variant="h4" className={classes.header} gutterBottom>
                                         Thông tin người dùng
                                     </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Họ và tên: {userInfo.name}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Ngày sinh: {userInfo.dob}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Số mũi đã tiêm: {injectionInfo.numberOfInjections}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 1: {injectionInfo.firstDose}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 2: {injectionInfo.secondDose}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Mũi số 3: {injectionInfo.thirdDose}{" "}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="h4" gutterBottom>
-                                        Lịch sử lây nhiễm
-                                    </Typography>
-                                    {injectionInfo.infectedTimes === "" ? (
-                                        <Stack>
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Họ và tên:"
+                                        defaultValue={userInfo.name}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Ngày tháng năm sinh:"
+                                        defaultValue={userInfo.dob}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Số mũi đã tiêm:"
+                                        defaultValue={injectionInfo.numberOfInjections}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Mũi số 1:"
+                                        defaultValue={injectionInfo.firstDose}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Mũi số 2:"
+                                        defaultValue={injectionInfo.secondDose}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        className={classes.textField}
+                                        label="Mũi số 3:"
+                                        defaultValue={injectionInfo.thirdDose}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        fullWidth
+                                    />
+
+                                    <Stack>
+                                        <Typography variant="h4" gutterBottom>
+                                            Lịch sử lây nhiễm
+                                        </Typography>
+                                        {injectionInfo.infectedTimes === "" ? (
                                             <Typography variant="subtitle1" gutterBottom>
                                                 <em>Bạn chưa từng nhiễm bệnh</em>
                                             </Typography>
-                                        </Stack>
-                                    ) : (
-                                        <Stack>
+                                        ) : (
                                             <Stack>
+
                                                 {injectionInfo.infectedDate1 === "" ? (
                                                     ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack
-                                                            direction="row"
-                                                            className="addInfo-button"
-                                                            spacing={1}
-                                                        >
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 1:{" "}
-                                                                {injectionInfo.infectedDate1} - {""}
-                                                            </Typography>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate1} {""}
-                                                            </Typography>
-                                                        </Stack>
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày nhiễm bệnh lần 1:"
+                                                            defaultValue={injectionInfo.infectedDate1}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày khỏi bệnh:"
+                                                            defaultValue={injectionInfo.curedDate1}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
                                                                 {injectionInfo.infectedNote1 === "" ? (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue="Không có"
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 ) : (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote1}
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue={injectionInfo.infectedNote1}
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 )}
                                                             </Typography>
                                                         </Stack>
                                                     </Stack>
                                                 )}
-                                            </Stack>
-                                            <Stack>
+
+
                                                 {injectionInfo.infectedDate2 === "" ? (
                                                     ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack
-                                                            direction="row"
-                                                            className="addInfo-button"
-                                                            spacing={1}
-                                                        >
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 2:{" "}
-                                                                {injectionInfo.infectedDate2} - {""}
-                                                            </Typography>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate2} {""}
-                                                            </Typography>
-                                                        </Stack>
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày nhiễm bệnh lần 2:"
+                                                            defaultValue={injectionInfo.infectedDate2}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày khỏi bệnh:"
+                                                            defaultValue={injectionInfo.curedDate2}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
                                                                 {injectionInfo.infectedNote2 === "" ? (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue="Không có"
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 ) : (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote2}
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue={injectionInfo.infectedNote2}
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 )}
                                                             </Typography>
                                                         </Stack>
                                                     </Stack>
                                                 )}
-                                            </Stack>
-                                            <Stack>
+
+
                                                 {injectionInfo.infectedDate3 === "" ? (
                                                     ""
                                                 ) : (
                                                     <Stack className=".addInfo-info">
-                                                        <Stack
-                                                            direction="row"
-                                                            className="addInfo-button"
-                                                            spacing={1}
-                                                        >
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày nhiễm bệnh lần 3:{" "}
-                                                                {injectionInfo.infectedDate3} - {""}
-                                                            </Typography>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                Ngày khỏi bệnh: {injectionInfo.curedDate3} {""}
-                                                            </Typography>
-                                                        </Stack>
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày nhiễm bệnh lần 3:"
+                                                            defaultValue={injectionInfo.infectedDate3}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
+                                                        <TextField
+                                                            className={classes.textField}
+                                                            label="Ngày khỏi bệnh:"
+                                                            defaultValue={injectionInfo.curedDate3}
+                                                            InputProps={{
+                                                                readOnly: true,
+                                                            }}
+                                                            fullWidth
+                                                        />
                                                         <Stack>
                                                             <Typography variant="subtitle1" gutterBottom>
                                                                 {injectionInfo.infectedNote3 === "" ? (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: Không có
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue="Không có"
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 ) : (
-                                                                    <Typography variant="subtitle1" gutterBottom>
-                                                                        Ghi chú: {injectionInfo.infectedNote3}
-                                                                    </Typography>
+                                                                    <TextField
+                                                                        className={classes.textField}
+                                                                        label="Ghi chú"
+                                                                        defaultValue={injectionInfo.infectedNote3}
+                                                                        InputProps={{
+                                                                            readOnly: true,
+                                                                        }}
+                                                                        fullWidth
+                                                                    />
                                                                 )}
                                                             </Typography>
                                                         </Stack>
                                                     </Stack>
                                                 )}
                                             </Stack>
-                                        </Stack>
-                                    )}
-                                </Stack>
-                            </Stack>
-                            <Stack alignItems="center">
-                                <Button
-                                    sx={{ marginBottom: 5, marginTop: 1 }}
-                                    variant="contained"
-                                    type="sumbit"
-                                >
-                                    Thêm thông tin lây nhiễm
-                                </Button>
-                                <Stack alignItems="center">
-                                    <FormControl variant="outlined" sx={{ m: 1, minWidth: 200 }}>
-                                        <InputLabel id="demo-simple-select-label">
-                                            Số lần nhiễm bệnh
-                                        </InputLabel>
-                                        <Select
-                                            label={"Số lần nhiễm bệnh"}
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={(e) => setInfectedTimes(e.target.value)}
-                                            value={infectedTimes}
-                                        >
-                                            <MenuItem value="" disabled>
+                                        )}
+                                    </Stack>
+                                </Grid>
+
+                                <Grid item sm={6}>
+                                    <Stack alignItems="center">
+                                        <Typography variant="h4" className={classes.header} gutterBottom>
+                                            Khai báo số lần nhiễm bệnh
+                                        </Typography>
+                                        <FormControl variant="outlined" sx={{ m: 1, minWidth: 200 }}>
+                                            <InputLabel id="demo-simple-select-label">
                                                 Số lần nhiễm bệnh
-                                            </MenuItem>
-                                            <MenuItem value="1 lần">1 lần</MenuItem>
-                                            <MenuItem value="2 lần">2 lần</MenuItem>
-                                            <MenuItem value="3 lần">3 lần</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                    {infectedTimes === "1 lần" ? (
-                                        <Stack>
-                                            <Stack
-                                                spacing={2}
-                                                direction="row"
-                                                className="addInfo-button"
-                                                sx={{ alignItems: "baseline" }}
+                                            </InputLabel>
+                                            <Select
+                                                label={"Số lần nhiễm bệnh"}
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                onChange={(e) => setInfectedTimes(e.target.value)}
+                                                value={infectedTimes}
                                             >
-                                                <TextField
-                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                    id="standard-basic"
-                                                    helperText="Lần nhiễm số 1"
-                                                    variant="outlined"
-                                                    type="date"
-                                                    className="register-dob"
-                                                    value={infectedDate1}
-                                                    onChange={(e) => setInfectedDate1(e.target.value)}
-                                                />
-                                            </Stack>
-                                            <Stack
-                                                spacing={2}
-                                                direction="row"
-                                                className="addInfo-button"
-                                                sx={{ alignItems: "baseline" }}
-                                            >
-                                                <TextField
-                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                    id="standard-basic"
-                                                    helperText="Ngày khỏi bệnh"
-                                                    variant="outlined"
-                                                    type="date"
-                                                    className="register-dob"
-                                                    value={curedDate1}
-                                                    onChange={(e) => setCuredDate1(e.target.value)}
-                                                />
-                                            </Stack>
-                                            <Stack
-                                                spacing={2}
-                                                direction="row"
-                                                className="addInfo-button"
-                                                sx={{ alignItems: "baseline" }}
-                                            >
-                                                <TextField
-                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                    id="standard-basic"
-                                                    variant="outlined"
-                                                    type="text"
-                                                    label="Ghi chú lần 1"
-                                                    className="addInfo-findWithPhone"
-                                                    value={infectedNote1}
-                                                    onChange={(e) => setInfectedNote1(e.target.value)}
-                                                />
-                                            </Stack>
-                                        </Stack>
-                                    ) : (
-                                        <Stack>
-                                            {infectedTimes === "2 lần" ? (
-                                                <Stack>
-                                                    <Stack
-                                                        spacing={2}
-                                                        direction="row"
-                                                        className="addInfo-button"
-                                                        sx={{ alignItems: "baseline" }}
-                                                    >
+                                                <MenuItem value="" disabled>
+                                                    Số lần nhiễm bệnh
+                                                </MenuItem>
+                                                <MenuItem value="1 lần">1 lần</MenuItem>
+                                                <MenuItem value="2 lần">2 lần</MenuItem>
+                                                <MenuItem value="3 lần">3 lần</MenuItem>
+                                            </Select>
+                                        </FormControl>
+
+                                        {infectedTimes === "1 lần" ? (
+                                            <Grid container>
+                                                <Grid item >
+                                                    <Box className={`${classes.box} ${classes.infected1}`}>
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
                                                             id="standard-basic"
@@ -412,23 +444,6 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
                                                             id="standard-basic"
-                                                            helperText="Lần nhiễm số 2"
-                                                            variant="outlined"
-                                                            type="date"
-                                                            className="register-dob"
-                                                            value={infectedDate2}
-                                                            onChange={(e) => setInfectedDate2(e.target.value)}
-                                                        />
-                                                    </Stack>
-                                                    <Stack
-                                                        spacing={2}
-                                                        direction="row"
-                                                        className="addInfo-button"
-                                                        sx={{ alignItems: "baseline" }}
-                                                    >
-                                                        <TextField
-                                                            sx={{ margin: 1, minWidth: 210 }}
-                                                            id="standard-basic"
                                                             helperText="Ngày khỏi bệnh"
                                                             variant="outlined"
                                                             type="date"
@@ -439,23 +454,6 @@ const AddInjectionInfo = () => {
                                                         <TextField
                                                             sx={{ margin: 1, minWidth: 210 }}
                                                             id="standard-basic"
-                                                            helperText="Ngày khỏi bệnh"
-                                                            variant="outlined"
-                                                            type="date"
-                                                            className="register-dob"
-                                                            value={curedDate2}
-                                                            onChange={(e) => setCuredDate2(e.target.value)}
-                                                        />
-                                                    </Stack>
-                                                    <Stack
-                                                        spacing={2}
-                                                        direction="row"
-                                                        className="addInfo-button"
-                                                        sx={{ alignItems: "baseline" }}
-                                                    >
-                                                        <TextField
-                                                            sx={{ margin: 1, minWidth: 210 }}
-                                                            id="standard-basic"
                                                             variant="outlined"
                                                             type="text"
                                                             label="Ghi chú lần 1"
@@ -463,27 +461,15 @@ const AddInjectionInfo = () => {
                                                             value={infectedNote1}
                                                             onChange={(e) => setInfectedNote1(e.target.value)}
                                                         />
-                                                        <TextField
-                                                            id="standard-basic"
-                                                            variant="outlined"
-                                                            type="text"
-                                                            label="Ghi chú lần 2"
-                                                            className="addInfo-findWithPhone"
-                                                            value={infectedNote2}
-                                                            onChange={(e) => setInfectedNote2(e.target.value)}
-                                                        />
-                                                    </Stack>
-                                                </Stack>
-                                            ) : (
-                                                <Stack>
-                                                    {infectedTimes === "3 lần" ? (
-                                                        <Stack>
-                                                            <Stack
-                                                                spacing={2}
-                                                                direction="row"
-                                                                className="addInfo-button"
-                                                                sx={{ alignItems: "baseline" }}
-                                                            >
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
+                                        ) : (
+                                            <Stack>
+                                                {infectedTimes === "2 lần" ? (
+                                                    <Grid container spacing={2}>
+                                                        <Grid item lg={6}>
+                                                            <Box className={`${classes.box} ${classes.infected1}`}>
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -492,41 +478,8 @@ const AddInjectionInfo = () => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={infectedDate1}
-                                                                    onChange={(e) =>
-                                                                        setInfectedDate1(e.target.value)
-                                                                    }
+                                                                    onChange={(e) => setInfectedDate1(e.target.value)}
                                                                 />
-                                                                <TextField
-                                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                                    id="standard-basic"
-                                                                    helperText="Lần nhiễm số 2"
-                                                                    variant="outlined"
-                                                                    type="date"
-                                                                    className="register-dob"
-                                                                    value={infectedDate2}
-                                                                    onChange={(e) =>
-                                                                        setInfectedDate2(e.target.value)
-                                                                    }
-                                                                />
-                                                                <TextField
-                                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                                    id="standard-basic"
-                                                                    helperText="Lần nhiễm số 3"
-                                                                    variant="outlined"
-                                                                    type="date"
-                                                                    className="register-dob"
-                                                                    value={infectedDate3}
-                                                                    onChange={(e) =>
-                                                                        setInfectedDate3(e.target.value)
-                                                                    }
-                                                                />
-                                                            </Stack>
-                                                            <Stack
-                                                                spacing={2}
-                                                                direction="row"
-                                                                className="addInfo-button"
-                                                                sx={{ alignItems: "baseline" }}
-                                                            >
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
                                                                     id="standard-basic"
@@ -535,9 +488,31 @@ const AddInjectionInfo = () => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={curedDate1}
-                                                                    onChange={(e) =>
-                                                                        setCuredDate1(e.target.value)
-                                                                    }
+                                                                    onChange={(e) => setCuredDate1(e.target.value)}
+                                                                />
+                                                                <TextField
+                                                                    sx={{ margin: 1, minWidth: 210 }}
+                                                                    id="standard-basic"
+                                                                    variant="outlined"
+                                                                    type="text"
+                                                                    label="Ghi chú lần 1"
+                                                                    className="addInfo-findWithPhone"
+                                                                    value={infectedNote1}
+                                                                    onChange={(e) => setInfectedNote1(e.target.value)}
+                                                                />
+                                                            </Box>
+                                                        </Grid>
+                                                        <Grid item lg={6}>
+                                                            <Box className={`${classes.box} ${classes.infected2}`}>
+                                                                <TextField
+                                                                    sx={{ margin: 1, minWidth: 210 }}
+                                                                    id="standard-basic"
+                                                                    helperText="Lần nhiễm số 2"
+                                                                    variant="outlined"
+                                                                    type="date"
+                                                                    className="register-dob"
+                                                                    value={infectedDate2}
+                                                                    onChange={(e) => setInfectedDate2(e.target.value)}
                                                                 />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
@@ -547,85 +522,169 @@ const AddInjectionInfo = () => {
                                                                     type="date"
                                                                     className="register-dob"
                                                                     value={curedDate2}
-                                                                    onChange={(e) =>
-                                                                        setCuredDate2(e.target.value)
-                                                                    }
+                                                                    onChange={(e) => setCuredDate2(e.target.value)}
                                                                 />
                                                                 <TextField
                                                                     sx={{ margin: 1, minWidth: 210 }}
-                                                                    id="standard-basic"
-                                                                    helperText="Ngày khỏi bệnh"
-                                                                    variant="outlined"
-                                                                    type="date"
-                                                                    className="register-dob"
-                                                                    value={curedDate3}
-                                                                    onChange={(e) =>
-                                                                        setCuredDate3(e.target.value)
-                                                                    }
-                                                                />
-                                                            </Stack>
-                                                            <Stack
-                                                                spacing={2}
-                                                                direction="row"
-                                                                className="addInfo-button"
-                                                                sx={{ alignItems: "baseline" }}
-                                                            >
-                                                                <TextField
-                                                                    sx={{ margin: 1, minWidth: 210 }}
-                                                                    id="standard-basic"
-                                                                    variant="outlined"
-                                                                    type="text"
-                                                                    label="Ghi chú lần 1"
-                                                                    className="addInfo-findWithPhone"
-                                                                    value={infectedNote1}
-                                                                    onChange={(e) =>
-                                                                        setInfectedNote1(e.target.value)
-                                                                    }
-                                                                />
-                                                                <TextField
                                                                     id="standard-basic"
                                                                     variant="outlined"
                                                                     type="text"
                                                                     label="Ghi chú lần 2"
                                                                     className="addInfo-findWithPhone"
                                                                     value={infectedNote2}
-                                                                    onChange={(e) =>
-                                                                        setInfectedNote2(e.target.value)
-                                                                    }
+                                                                    onChange={(e) => setInfectedNote2(e.target.value)}
                                                                 />
-                                                                <TextField
-                                                                    id="standard-basic"
-                                                                    variant="outlined"
-                                                                    type="text"
-                                                                    label="Ghi chú lần 3"
-                                                                    className="addInfo-findWithPhone"
-                                                                    value={infectedNote3}
-                                                                    onChange={(e) =>
-                                                                        setInfectedNote3(e.target.value)
-                                                                    }
-                                                                />
-                                                            </Stack>
-                                                        </Stack>
-                                                    ) : (
-                                                        <Stack></Stack>
-                                                    )}
-                                                </Stack>
-                                            )}
-                                        </Stack>
-                                    )}
-                                    <Button
-                                        variant="contained"
-                                        type="sumbit"
-                                        sx={{ marginBottom: 5, marginTop: 2 }}
-                                        onClick={submitInfectedInfoHandler}
-                                    >
-                                        Gửi
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
+                                                            </Box>
+                                                        </Grid>
+                                                    </Grid>
+                                                ) : (
+                                                    <Stack>
+                                                        {infectedTimes === "3 lần" ? (
+                                                            <Grid container sx={{ justifyContent: 'center' }}>
+                                                                <Box className={`${classes.box} ${classes.infected1}`}>
+                                                                    <Grid item lg={4}>
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Lần nhiễm số 1"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={infectedDate1}
+                                                                            onChange={(e) =>
+                                                                                setInfectedDate1(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Ngày khỏi bệnh"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={curedDate1}
+                                                                            onChange={(e) =>
+                                                                                setCuredDate1(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            variant="outlined"
+                                                                            type="text"
+                                                                            label="Ghi chú lần 1"
+                                                                            className="addInfo-findWithPhone"
+                                                                            value={infectedNote1}
+                                                                            onChange={(e) =>
+                                                                                setInfectedNote1(e.target.value)
+                                                                            }
+                                                                        />
+                                                                    </Grid>
+                                                                </Box>
+                                                                <Box className={`${classes.box} ${classes.infected2}`}>
+                                                                    <Grid item lg={4}>
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Lần nhiễm số 2"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={infectedDate2}
+                                                                            onChange={(e) =>
+                                                                                setInfectedDate2(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Ngày khỏi bệnh"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={curedDate2}
+                                                                            onChange={(e) =>
+                                                                                setCuredDate2(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            variant="outlined"
+                                                                            type="text"
+                                                                            label="Ghi chú lần 2"
+                                                                            className="addInfo-findWithPhone"
+                                                                            value={infectedNote2}
+                                                                            onChange={(e) =>
+                                                                                setInfectedNote2(e.target.value)
+                                                                            }
+                                                                        />
+                                                                    </Grid>
+                                                                </Box>
+                                                                <Box className={`${classes.box} ${classes.infected3}`}>
+                                                                    <Grid item lg={4}>
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Lần nhiễm số 3"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={infectedDate3}
+                                                                            onChange={(e) =>
+                                                                                setInfectedDate3(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            helperText="Ngày khỏi bệnh"
+                                                                            variant="outlined"
+                                                                            type="date"
+                                                                            className="register-dob"
+                                                                            value={curedDate3}
+                                                                            onChange={(e) =>
+                                                                                setCuredDate3(e.target.value)
+                                                                            }
+                                                                        />
+                                                                        <TextField
+                                                                            sx={{ margin: 1, minWidth: 210 }}
+                                                                            id="standard-basic"
+                                                                            variant="outlined"
+                                                                            type="text"
+                                                                            label="Ghi chú lần 3"
+                                                                            className="addInfo-findWithPhone"
+                                                                            value={infectedNote3}
+                                                                            onChange={(e) =>
+                                                                                setInfectedNote3(e.target.value)
+                                                                            }
+                                                                        />
+                                                                    </Grid>
+                                                                </Box>
+                                                            </Grid>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </Stack>
+                                                )}
+                                            </Stack>
+                                        )}
+                                        <Button
+                                            variant="contained"
+                                            type="sumbit"
+                                            sx={{ marginBottom: 5, marginTop: 2 }}
+                                            onClick={submitInfectedInfoHandler}
+                                        >
+                                            Gửi
+                                        </Button>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
+
+
+                        </CardContent>
                     ) : (
-                        <Stack className="addRole-form">
+                        <CardContent className="addRole-form">
                             <Stack spacing={2} alignItems="center" >
                                 <TextField
                                     id="standard-basic"
@@ -644,9 +703,9 @@ const AddInjectionInfo = () => {
                                     Tìm
                                 </Button>
                             </Stack>
-                        </Stack>
+                        </CardContent>
                     )}
-                </Stack>
+                </Card>
             ) : (
                 <Stack>
                     <Typography variant="h5" gutterBottom>
@@ -657,7 +716,7 @@ const AddInjectionInfo = () => {
                     </Stack>
                 </Stack>
             )}
-        </Stack>
+        </Container>
     );
 };
 
