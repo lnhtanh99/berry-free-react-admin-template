@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { onSnapshot, setDoc, doc, deleteDoc, addDoc } from '@firebase/firestore';
+import { onSnapshot, setDoc, doc, deleteDoc, addDoc, getDoc } from '@firebase/firestore';
 import { auth, queryGetUserInfoByPhone, queryGetUserInfoByEmail, dataRef, db, injectionRef } from '../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -59,6 +59,17 @@ const AddInfo = () => {
     }
   });
 
+  //fetch stat
+  const getData = async () => {
+    const docSnap = await getDoc(doc(db, "localStatData", "data"))
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+
   const findInfoByPhoneHandler = (e) => {
     e.preventDefault();
     if (totalUserInfo) {
@@ -114,7 +125,9 @@ const AddInfo = () => {
       injectPerson1: injectPerson1,
       injectPerson2: injectPerson2,
       injectPerson3: injectPerson3,
-      infectedTimes: ''
+      infectedTimes: '',
+      vaccinated: true,
+      dataSubmitted: true,
     });
     setDate('');
     setPlace('');
@@ -149,6 +162,7 @@ const AddInfo = () => {
   };
 
   useEffect(() => {
+    getData()
     onSnapshot(injectionRef, (snapshot) => {
       let users = [];
       snapshot.docs.forEach((doc) => {

@@ -151,6 +151,7 @@ const AddInjectionInfo = () => {
             curedDate2,
             curedDate3,
             infectedTimes: infectedTimes,
+            verifiedByAdmin: true,
         });
     };
 

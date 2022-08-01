@@ -85,7 +85,7 @@ const ConfirmChange = () => {
       injectPerson2: "",
       injectPerson3: "",
       infectedTimes: "",
-
+      verifiedByAdmin: true,
       status: "approved",
     });
     setOpen(false);
