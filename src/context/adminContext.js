@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AdminContext = createContext();
 
 function AdminProvider({ children }) {
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(true);
     const [isUser, setIsUser] = useState(false);
 
     return (

@@ -60,15 +60,6 @@ const AddInfo = () => {
   });
 
   //fetch stat
-  const getData = async () => {
-    const docSnap = await getDoc(doc(db, "localStatData", "data"))
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
 
   const findInfoByPhoneHandler = (e) => {
     e.preventDefault();
@@ -162,7 +153,6 @@ const AddInfo = () => {
   };
 
   useEffect(() => {
-    getData()
     onSnapshot(injectionRef, (snapshot) => {
       let users = [];
       snapshot.docs.forEach((doc) => {

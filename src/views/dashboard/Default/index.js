@@ -12,6 +12,8 @@ import DeathCard from './DeathCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
 
+import { doc, getDoc } from '@firebase/firestore';
+import { db } from '../../../firebase/firebase';
 //axios
 import axios from 'axios';
 
@@ -23,6 +25,7 @@ const Dashboard = () => {
     const [deaths, setDeaths] = useState(0);
     const [recovered, setRecovered] = useState(0);
     const [everydayCases, setEverydayCases] = useState(null);
+    const [injectionState, setInjectionState] = useState(null);
 
     useEffect(() => {
         setLoading(false);
@@ -37,6 +40,19 @@ const Dashboard = () => {
         };
 
         fetchCases();
+
+        const getData = async () => {
+            const docSnap = await getDoc(doc(db, "localStatData", "data"))
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                setInjectionState(docSnap.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
+
+        getData();
     }, [cases, deaths, recovered]);
 
     return (
@@ -44,20 +60,20 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <CasesCard cases={ cases } isLoading={isLoading} />
+                        <CasesCard cases={cases} isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <RecoveryCard recovered={ recovered } isLoading={isLoading} />
+                        <RecoveryCard recovered={recovered} isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={4} md={12} sm={12} xs={12}>
-                        <DeathCard deaths={ deaths } isLoading={isLoading} />
+                        <DeathCard deaths={deaths} isLoading={isLoading} />
                     </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={8}>
-                        <PopularCard isLoading={isLoading} />
+                        <PopularCard isLoading={isLoading}  injectionState={injectionState}/>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <TotalGrowthBarChart everydayCases={everydayCases} isLoading={isLoading} />
