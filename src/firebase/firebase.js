@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where } from "firebase/firestore"
+import { getFirestore, collection, query, where } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
@@ -16,7 +16,7 @@ const firebaseConfig = {
     storageBucket: "covid-app-5fc4f.appspot.com",
     messagingSenderId: "506845253830",
     appId: "1:506845253830:web:c932dd81914459c0ee87c7",
-    measurementId: "G-D3NBTDPDC0"
+    measurementId: "G-D3NBTDPDC0",
 };
 
 // Initialize Firebase
@@ -25,24 +25,43 @@ export const storage = getStorage(app);
 
 // init services
 
-const db = getFirestore()
+const db = getFirestore();
 const auth = getAuth();
-auth.languageCode = 'en';
+auth.languageCode = "en";
 
 // collection ref
-const colRef = collection(db, "Users")
-const loginRef = collection(db, "login")
-const dataRef = collection(db, "userData")
-const injectionRef = collection(db, "injectionData")
-const requestRef = collection(db, "requestData")
-const injectionRequestRef = collection(db, "injectionRequestData")
+const colRef = collection(db, "Users");
+const loginRef = collection(db, "login");
+const dataRef = collection(db, "userData");
+const injectionRef = collection(db, "injectionData");
+const requestRef = collection(db, "requestData");
+const injectionRequestRef = collection(db, "injectionRequestData");
 const selfDeclareRef = collection(db, "selfDeclareData");
+const rolesRef = collection(db, "roleData");
 
 // get collection data
-const queryGetUserInfoByEmail = (email) => query(dataRef, where("email", "==", email))
+const queryGetUserInfoByEmail = (email) =>
+    query(dataRef, where("email", "==", email));
 
-const queryGetUserInfoByPhone = (collection, phone) => query(collection, where("phone", "==", phone))
+const queryGetUserInfoByPhone = (collection, phone) =>
+    query(collection, where("phone", "==", phone));
 
-const queryGetUserInfoById = (collection, id) => query(collection, where("idNumber", "==", id))
+const queryGetUserInfoById = (collection, id) =>
+    query(collection, where("idNumber", "==", id));
 
-export { app, db, colRef, loginRef, dataRef, injectionRef, auth, requestRef, injectionRequestRef, selfDeclareRef, queryGetUserInfoByEmail, queryGetUserInfoByPhone, queryGetUserInfoById };
+export {
+    app,
+    db,
+    colRef,
+    loginRef,
+    dataRef,
+    injectionRef,
+    auth,
+    requestRef,
+    injectionRequestRef,
+    selfDeclareRef,
+    rolesRef,
+    queryGetUserInfoByEmail,
+    queryGetUserInfoByPhone,
+    queryGetUserInfoById,
+};
