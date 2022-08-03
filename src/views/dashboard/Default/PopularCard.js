@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid, MenuItem, TextField, Typography, Card, CardContent } from '@mui/material';
 
 // third-party
 import ApexCharts from 'apexcharts';
@@ -14,11 +14,11 @@ import Chart from 'react-apexcharts';
 import SkeletonPopularCard from 'ui-component/cards/Skeleton/PopularCard';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-
+import { Carousel } from 'react-responsive-carousel';
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const PopularCard = ({ isLoading ,injectionState, infectionState }) => {
+const PopularCard = ({ isLoading, injectionState, infectionState }) => {
     const [injectionChartData, setInjectionChartData] = useState({});
     const [infectionChartData, setInfectionChartData] = useState({});
 
@@ -126,7 +126,7 @@ const PopularCard = ({ isLoading ,injectionState, infectionState }) => {
     };
 
     const infectionChart = {
-        height: 480,
+        height: 510,
         type: 'bar',
         options: {
             chart: {
@@ -212,7 +212,6 @@ const PopularCard = ({ isLoading ,injectionState, infectionState }) => {
     useEffect(() => {
         setInjectionChartData(injectionChart);
         setInfectionChartData(infectionChart);
-        console.log(infectionState)
     }, [injectionState, infectionState]);
 
     return (
@@ -236,11 +235,22 @@ const PopularCard = ({ isLoading ,injectionState, infectionState }) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            {injectionState && <Chart {...injectionChartData} />}
+                        <Grid item sm={6}>
+                            <Card>
+                                <CardContent>
+                                <Typography variant="h4" sx={{ height: '80px' }}>Dữ liệu tiêm vaccine theo số mũi đã tiêm tại tổ chức</Typography>
+                                    {injectionState && <Chart {...injectionChartData} />}
+                                </CardContent>
+                            </Card>
                         </Grid>
-                        <Grid item xs={12}>
-                            {infectionState && <Chart {...infectionChartData} />}
+                        <Grid item sm={6}>
+                            <Card>
+                                <CardContent>
+                                <Typography variant="h4" sx={{ height: '80px' }}>Tình hình nhiễm bệnh tại tổ chức</Typography>
+                                    {infectionState && <Chart {...infectionChartData} />}
+                                </CardContent>
+                            </Card>
+
                         </Grid>
                     </Grid>
                 </MainCard>

@@ -45,7 +45,6 @@ const Dashboard = () => {
         const getData = async () => {
             const docSnap = await getDoc(doc(db, "localStatData", "data"))
             if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
                 setInjectionState(docSnap.data().overview);
                 setInfectionState(docSnap.data().infectionStat);
             } else {
@@ -74,10 +73,10 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={9}>
                         <PopularCard isLoading={isLoading}  injectionState={injectionState} infectionState={infectionState}/>
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                         <TotalGrowthBarChart everydayCases={everydayCases} isLoading={isLoading} />
                     </Grid>
                 </Grid>

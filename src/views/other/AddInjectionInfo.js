@@ -704,8 +704,8 @@ const AddInjectionInfo = () => {
                             </Grid>
                         </CardContent>
                     ) : (
-                        <CardContent className="addRole-form">
-                            <Stack spacing={2} alignItems="center" >
+                        <CardContent>
+                            <Stack spacing={2} >
                                 <TextField
                                     id="standard-basic"
                                     variant="standard"
