@@ -152,6 +152,7 @@ const AddInjectionInfo = () => {
             curedDate3,
             infectedTimes: infectedTimes,
             verifiedByAdmin: true,
+            isCurrentlyInfected,
         });
     };
 

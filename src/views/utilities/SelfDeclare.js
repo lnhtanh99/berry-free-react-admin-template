@@ -108,12 +108,13 @@ const SelfDeclare = () => {
       curedDate1,
       curedDate2,
       curedDate3,
+      isCurrentlyInfected,
 
     });
-    setDoc(doc(db, "injectionData", injectRefId), {
-      ...declareRefInfo,
-      infectedTimes: infectedTimes,
-    });
+    // setDoc(doc(db, "injectionData", injectRefId), {
+    //   ...declareRefInfo,
+    //   infectedTimes: infectedTimes,
+    // });
   };
 
   useEffect(() => {

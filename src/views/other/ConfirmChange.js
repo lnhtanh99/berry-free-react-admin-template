@@ -71,6 +71,7 @@ const ConfirmChange = () => {
       injectPerson1: requestInfo?.injectPerson1,
       injectPerson2: requestInfo?.injectPerson2,
       injectPerson3: requestInfo?.injectPerson3,
+      dataSubmitted: true,
     });
     setDoc(doc(db, "injectionRequestData", requestId), {
       ...requestInfo,
