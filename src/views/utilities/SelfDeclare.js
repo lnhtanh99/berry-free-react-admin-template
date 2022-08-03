@@ -136,7 +136,6 @@ const SelfDeclare = () => {
       });
       if (authInfo.name) {
         onSnapshot(queryGetUserInfoByPhone(selfDeclareRef, phone), (snapshot) => {
-          console.log(snapshot._snapshot.docChanges.length);
           if (snapshot._snapshot.docChanges.length === 0) {
             addDoc(selfDeclareRef, {
               phone: phone,
@@ -161,7 +160,6 @@ const SelfDeclare = () => {
         }
         );
         onSnapshot(queryGetUserInfoByPhone(injectionRef, phone), (snapshot) => {
-          console.log(snapshot._snapshot.docChanges.length);
           snapshot.forEach((data) => {
             setInjectRefInfo(data.data());
             setInjectRefId(data.id);
@@ -169,8 +167,8 @@ const SelfDeclare = () => {
         })
       }
     }
-
   }, [isLoggedIn, userRole]);
+
 
   return (
     <Container>

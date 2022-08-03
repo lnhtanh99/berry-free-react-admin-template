@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import { useNavigate,  Link as RouterLink } from "react-router-dom";
 
+
+import { Link as MUILink } from "@mui/material";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -78,7 +74,8 @@ const Main = () => {
       backgroundColor: '#eee'
     },
     grid: {
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginBottom: '30px'
     },
     textField: {
       margin: "20px 0",
@@ -266,7 +263,7 @@ const Main = () => {
                             }}
                             fullWidth
                             multiline
-                            maxRows={1}
+                            minRows={3}
                           />
                         </Box>
                       </Grid>
@@ -295,7 +292,7 @@ const Main = () => {
                             }}
                             fullWidth
                           />
-                          
+
                           <TextField
                             className={classes.textField}
                             label=" Đơn vị tiêm: "
@@ -304,6 +301,8 @@ const Main = () => {
                               readOnly: true,
                             }}
                             fullWidth
+                            minRows={3}
+                            multiline
                           />
                         </Box>
                       </Grid>
@@ -314,7 +313,7 @@ const Main = () => {
                     ) : (
                       <Grid item md={4}>
                         <Box className={`${classes.box} ${classes.third}`}>
-                        <TextField
+                          <TextField
                             className={classes.textField}
                             label="  Mũi số 3: "
                             value={injectionInfo?.thirdDose}
@@ -332,7 +331,7 @@ const Main = () => {
                             }}
                             fullWidth
                           />
-                          
+
                           <TextField
                             className={classes.textField}
                             label=" Đơn vị tiêm: "
@@ -341,10 +340,28 @@ const Main = () => {
                               readOnly: true,
                             }}
                             fullWidth
+                            minRows={3}
+                            multiline
                           />
                         </Box>
                       </Grid>
                     )}
+                  </Grid>
+                  <Grid container>
+                    <Grid item>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Để yêu cầu thay đổi thông tin, vui lòng bấm
+                        <MUILink
+                          to="/utils/injection-info-request"
+                          underline="none"
+                          color="inherit"
+                          component={RouterLink}
+                          sx={{ fontWeight: 'bold', m: 1 }}
+                        >
+                          <Button variant="outlined" color="error">vào đây</Button>
+                        </MUILink>
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </>
               )}

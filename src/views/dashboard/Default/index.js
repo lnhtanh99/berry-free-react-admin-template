@@ -26,6 +26,7 @@ const Dashboard = () => {
     const [recovered, setRecovered] = useState(0);
     const [everydayCases, setEverydayCases] = useState(null);
     const [injectionState, setInjectionState] = useState(null);
+    const [infectionState, setInfectionState] = useState(null);
 
     useEffect(() => {
         setLoading(false);
@@ -45,7 +46,8 @@ const Dashboard = () => {
             const docSnap = await getDoc(doc(db, "localStatData", "data"))
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data());
-                setInjectionState(docSnap.data());
+                setInjectionState(docSnap.data().overview);
+                setInfectionState(docSnap.data().infectionStat);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -73,7 +75,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={8}>
-                        <PopularCard isLoading={isLoading}  injectionState={injectionState}/>
+                        <PopularCard isLoading={isLoading}  injectionState={injectionState} infectionState={infectionState}/>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <TotalGrowthBarChart everydayCases={everydayCases} isLoading={isLoading} />

@@ -31,7 +31,7 @@ const TotalGrowthBarChart = ({ isLoading, everydayCases }) => {
 
     const chart = {
         height: 480,
-        type: 'bar',
+
         options: {
             chart: {
                 id: 'bar-chart',

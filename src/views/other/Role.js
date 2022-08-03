@@ -12,7 +12,7 @@ import {
 } from "../../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-import { Card, CardContent, Container, Menu, Box, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Autocomplete } from "@mui/material";
+import { Card, CardContent, Container, Menu, Box, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Autocomplete, Grid } from "@mui/material";
 
 import { AdminContext } from '../../context/adminContext';
 
@@ -171,52 +171,56 @@ const AddRole = () => {
         <Card sx={{ marginBottom: '50px', textAlign: 'center' }}>
           {/* Giao diện chỉ admin nhìn thấy */}
           <CardContent>
-            {isAddRole ?
-              <Box className={classes.box}>
-                <Stack sx={{ alignItems: 'flex-end' }}>
-                  <IconSquareX className={classes.icons} onClick={() => setIsAddRole(false)} />
-                </Stack>
-                <Typography variant="h3">Tạo vai trò</Typography>
-                <FormControl>
-                  <TextField
-                    className={classes.textField}
-                    label="tạo role"
-                    onChange={e => setRoleName(e.target.value)}
-                    value={roleName}
-                  />
-                  <Button variant="contained" color="secondary" onClick={addRole}>Tạo</Button>
-                </FormControl>
-              </Box>
-              :
-              <Button variant="contained" color="secondary" className={classes.button} onClick={() => setIsAddRole(true)}>Tạo vai trò</Button>
-            }
-
-            {isDeleteRole ?
-              <Box className={classes.box}>
-                <Stack sx={{ alignItems: 'flex-end' }}>
-                  <IconSquareX className={classes.icons} onClick={() => setIsDeleteRole(false)} />
-                </Stack>
-                <Typography variant="h3">Xóa vai trò</Typography>
-                <Autocomplete
-                  className={classes.textField}
-                  isOptionEqualToValue={(option, value) => option.id === value.id}
-                  disablePortal
-                  onChange={(event, value) => setAutocompleteVal(value)}
-                  value={autoCompleteVal}
-                  id="combo-box-demo"
-                  options={roleList}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Chọn vai trò" />
-                  )}
-                />
-                <Button variant="contained" color="error" onClick={removeRole}>
-                  Xóa
-                </Button>
-              </Box>
-              :
-              <Button variant="contained" color="error" className={classes.button} onClick={() => setIsDeleteRole(true)}>Xóa vai trò</Button>
-            }
-
+            <Grid container>
+              <Grid item sm={6}>
+                {isAddRole ?
+                  <Box className={classes.box}>
+                    <Stack sx={{ alignItems: 'flex-end' }}>
+                      <IconSquareX className={classes.icons} onClick={() => setIsAddRole(false)} />
+                    </Stack>
+                    <Typography variant="h3">Tạo vai trò</Typography>
+                    <FormControl>
+                      <TextField
+                        className={classes.textField}
+                        label="tạo role"
+                        onChange={e => setRoleName(e.target.value)}
+                        value={roleName}
+                      />
+                      <Button variant="contained" color="secondary" onClick={addRole}>Tạo</Button>
+                    </FormControl>
+                  </Box>
+                  :
+                  <Button variant="contained" color="secondary" className={classes.button} onClick={() => setIsAddRole(true)}>Tạo vai trò</Button>
+                }
+              </Grid>
+              <Grid item sm={6}>
+                {isDeleteRole ?
+                  <Box className={classes.box}>
+                    <Stack sx={{ alignItems: 'flex-end' }}>
+                      <IconSquareX className={classes.icons} onClick={() => setIsDeleteRole(false)} />
+                    </Stack>
+                    <Typography variant="h3">Xóa vai trò</Typography>
+                    <Autocomplete
+                      className={classes.textField}
+                      isOptionEqualToValue={(option, value) => option.id === value.id}
+                      disablePortal
+                      onChange={(event, value) => setAutocompleteVal(value)}
+                      value={autoCompleteVal}
+                      id="combo-box-demo"
+                      options={roleList}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Chọn vai trò" />
+                      )}
+                    />
+                    <Button variant="contained" color="error" onClick={removeRole}>
+                      Xóa
+                    </Button>
+                  </Box>
+                  :
+                  <Button variant="contained" color="error" className={classes.button} onClick={() => setIsDeleteRole(true)}>Xóa vai trò</Button>
+                }
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       }

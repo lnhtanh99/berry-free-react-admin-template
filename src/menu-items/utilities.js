@@ -26,22 +26,6 @@ const utilities = {
             breadcrumbs: false
         },
         {
-            id: 'info',
-            title: 'Thông tin cá nhân',
-            type: 'item',
-            url: '/utils/info',
-            icon: icons.IconUser,
-            breadcrumbs: false
-        },
-        {
-            id: 'edit-info',
-            title: 'Sửa thông tin tiêm chủng',
-            type: 'item',
-            url: '/utils/injection-info-request',
-            icon: icons.IconEdit,
-            breadcrumbs: false
-        },
-        {
             id: 'history',
             title: 'Lịch sử lây nhiễm',
             type: 'item',
@@ -55,6 +39,14 @@ const utilities = {
             type: 'item',
             url: '/utils/self-declare',
             icon: icons.IconWriting,
+            breadcrumbs: false
+        },
+        {
+            id: 'info',
+            title: 'Thông tin cá nhân',
+            type: 'item',
+            url: '/utils/info',
+            icon: icons.IconUser,
             breadcrumbs: false
         },
     ]

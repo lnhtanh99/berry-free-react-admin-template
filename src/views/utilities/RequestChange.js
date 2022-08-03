@@ -136,10 +136,8 @@ const RequestChange = () => {
                 >
                     <CardContent>
                         <Typography variant="h3" className={classes.header} gutterBottom >Điền thông tin cần  thay đổi</Typography>
-
                         <Grid
                             container
-                            className="request-form"
                             spacing={4}
                         >
                             <Grid item sm={6}>
@@ -171,7 +169,6 @@ const RequestChange = () => {
                                 </FormControl>
                                 <FormControl fullWidth>
                                     <Typography className={classes.error}> {errors.dob?.message}</Typography>
-                                    <InputLabel htmlFor="dob">Ngày tháng năm sinh</InputLabel>
                                     <TextField
                                         className={classes.textField}
                                         type="date"
