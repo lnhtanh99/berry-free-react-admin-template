@@ -19,22 +19,6 @@ const other = {
             breadcrumbs: false
         },
         {
-            id: 'change-role',
-            title: 'Thay đổi phân quyền',
-            type: 'item',
-            url: '/admin/change-role',
-            icon: icons.IconSitemap,
-            breadcrumbs: false
-        },
-        {
-            id: 'add_role',
-            title: 'Thêm quyền',
-            type: 'item',
-            url: '/admin/add-role',
-            icon: icons.IconSitemap,
-            breadcrumbs: false
-        },
-        {
             id: 'confirm_change',
             title: 'Xác nhận thông tin khai báo',
             type: 'item',
