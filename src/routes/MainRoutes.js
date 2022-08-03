@@ -16,6 +16,9 @@ const RequestChange = Loadable(lazy(() => import('views/utilities/RequestChange'
 const SelfDeclare = Loadable(lazy(() => import('views/utilities/SelfDeclare')));
 const Register = Loadable(lazy(() => import('views/utilities/Register')));
 
+const CustomRole = Loadable(lazy(() => import('views/other/role/CustomRole')));
+const AddRole = Loadable(lazy(() => import('views/other/role/AddRole')));
+
 const Role = Loadable(lazy(() => import('views/other/Role')));
 const AddInjectionInfo = Loadable(lazy(() => import('views/other/AddInjectionInfo')));
 const AddInfo = Loadable(lazy(() => import('views/other/AddInfo')));
@@ -105,6 +108,24 @@ const MainRoutes = {
                 {
                     path: 'role',
                     element: <Role />
+                }
+            ]
+        },
+        {
+            path: 'admin',
+            children: [
+                {
+                    path: 'change-role',
+                    element: <CustomRole />
+                }
+            ]
+        },
+        {
+            path: 'admin',
+            children: [
+                {
+                    path: 'add-role',
+                    element: <AddRole />
                 }
             ]
         },
