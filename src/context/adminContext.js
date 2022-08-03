@@ -5,14 +5,17 @@ export const AdminContext = createContext();
 function AdminProvider({ children }) {
     const [isAdmin, setIsAdmin] = useState(true);
     const [isUser, setIsUser] = useState(false);
+    const [isMod, setIsMod] = useState(false);
 
     return (
         <AdminContext.Provider 
             value={{ 
                 isAdmin,
                 isUser,
+                isMod,
                 setIsAdmin,
-                setIsUser
+                setIsUser,
+                setIsMod
             }}
         >
             {children}

@@ -24,7 +24,7 @@ import {
 } from "../../firebase/firebase";
 
 import { onSnapshot, doc, setDoc, orderBy, getDocs } from "@firebase/firestore";
-import { Typography, Stack, Container, Card, Box, CardContent, Button, Grid } from "@mui/material";
+import { Typography, Stack, Container, Card, Box, CardContent, Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
 
 import { makeStyles } from "@mui/styles";
@@ -64,22 +64,25 @@ const Main = () => {
       textTransform: 'uppercase',
     },
     box: {
-      padding: '30px',
+      padding: '10px',
       borderRadius: '5px',
-      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)'
+      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
     },
     first: {
-      backgroundColor: 'red',
+      backgroundColor: '#dfe6e9',
     },
-    second : {
-      backgroundColor: 'yellow'
+    second: {
+      backgroundColor: '#ecf0f1'
     },
     third: {
-      backgroundColor: 'limegreen'
+      backgroundColor: '#eee'
     },
     grid: {
       justifyContent: 'center'
-    }
+    },
+    textField: {
+      margin: "20px 0",
+    },
   }));
 
   const classes = useStyles();
@@ -236,15 +239,35 @@ const Main = () => {
                     ) : (
                       <Grid item md={4} >
                         <Box className={`${classes.box} ${classes.first}`}>
-                          <Typography variant="h3">
-                            Mũi số 1: {injectionInfo?.firstDose}
-                          </Typography>
-                          <Typography variant="subtitle1">
-                            Ngày tiêm : {injectionInfo?.injectDate1}
-                          </Typography>
-                          <Typography>
-                            Đơn vị tiêm: {injectionInfo?.injectPerson1}
-                          </Typography>
+                          <TextField
+                            className={classes.textField}
+                            label=" Mũi số 1: "
+                            value={injectionInfo?.firstDose}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          <TextField
+                            className={classes.textField}
+                            label=" Ngày tiêm : "
+                            value={injectionInfo?.injectDate1}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          <TextField
+                            className={classes.textField}
+                            label=" Đơn vị tiêm: "
+                            value={injectionInfo?.injectPerson1}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                            multiline
+                            maxRows={1}
+                          />
                         </Box>
                       </Grid>
                     )}
@@ -254,15 +277,34 @@ const Main = () => {
                     ) : (
                       <Grid item md={4}>
                         <Box className={`${classes.box} ${classes.second}`}>
-                          <Typography variant="h3">
-                            Mũi số 2: {injectionInfo?.secondDose}
-                          </Typography>
-                          <Typography variant="subtitle1">
-                            Ngày tiêm : {injectionInfo?.injectDate2}
-                          </Typography>
-                          <Typography variant="body1">
-                            Đơn vị tiêm: {injectionInfo?.injectPerson3}
-                          </Typography>
+                          <TextField
+                            className={classes.textField}
+                            label=" Mũi số 2: "
+                            value={injectionInfo?.secondDose}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          <TextField
+                            className={classes.textField}
+                            label=" Ngày tiêm : "
+                            value={injectionInfo?.injectDate2}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          
+                          <TextField
+                            className={classes.textField}
+                            label=" Đơn vị tiêm: "
+                            value={injectionInfo?.injectPerson3}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
                         </Box>
                       </Grid>
                     )}
@@ -272,15 +314,34 @@ const Main = () => {
                     ) : (
                       <Grid item md={4}>
                         <Box className={`${classes.box} ${classes.third}`}>
-                          <Typography variant="h3">
-                            Mũi số 3: {injectionInfo?.thirdDose}
-                          </Typography>
-                          <Typography variant="subtitle1">
-                            Ngày tiêm : {injectionInfo?.injectDate3}
-                          </Typography>
-                          <Typography className={classes.host}variant="body1">
-                            Đơn vị tiêm: {injectionInfo?.injectPerson3}
-                          </Typography>
+                        <TextField
+                            className={classes.textField}
+                            label="  Mũi số 3: "
+                            value={injectionInfo?.thirdDose}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          <TextField
+                            className={classes.textField}
+                            label=" Ngày tiêm : "
+                            value={injectionInfo?.injectDate3}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
+                          
+                          <TextField
+                            className={classes.textField}
+                            label=" Đơn vị tiêm: "
+                            value={injectionInfo?.injectPerson3}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            fullWidth
+                          />
                         </Box>
                       </Grid>
                     )}

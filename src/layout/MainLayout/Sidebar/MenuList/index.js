@@ -11,7 +11,7 @@ import { AdminContext } from '../../../../context/adminContext';
 import { useContext } from 'react';
 
 const MenuList = () => {
-    const { isAdmin, isUser } = useContext(AdminContext);
+    const { isAdmin, isUser, isMod } = useContext(AdminContext);
 
     const navItems = menuItem.items.map((item) => {
         switch (item.type) {
@@ -52,7 +52,7 @@ const MenuList = () => {
         }
     });
 
-    return <>{isAdmin ? adminItems : (isUser ? userItems : navItems)}</>;
+    return <>{isAdmin || isMod ? adminItems : (isUser ? userItems : navItems)}</>;
 };
 
 export default MenuList;
