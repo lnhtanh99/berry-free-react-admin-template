@@ -8,7 +8,7 @@ import { dataRef, injectionRef } from "../../firebase/firebase";
 import { auth, queryGetUserInfoByPhone, db } from "../../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-import { Container, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Card, CardActions, CardContent } from "@mui/material";
+import { Container, Grid, Button, TextField, Stack, MenuItem, FormControl, Select, InputLabel, Typography, Card, CardActions, CardContent } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 const Register = () => {
   const navigate = useNavigate();
@@ -202,180 +202,198 @@ const Register = () => {
               <Typography variant="h2" gutterBottom className={classes.header}>
                 Đăng ký thông tin cá nhân
               </Typography>
-              <TextField
-                sx={{ margin: 1 }}
-                variant="outlined"
-                label="Email"
-                type="text"
-                className={classes.textField}
-                onChange={inputEmailHandler}
-                value={inputEmail}
-              />
-              <>
-                <TextField
-                  sx={{ margin: 1 }}
-                  variant="outlined"
-                  label="Họ và tên"
-                  autoComplete="off"
-                  className={classes.textField}
-                  {...register("inputName", { required: "Điền tên" })}
-                />
-                <Typography
-                  variant="caption"
-                  display="block"
-                  gutterBottom
-                  style={{ color: "red" }}
-                >
-                  {errors.inputName?.message}
-                </Typography>
-              </>
+              <Grid container spacing={2}>
+                <Grid item sm={6}>
+                  <TextField
+                    fullWidth
+                    sx={{ margin: 1 }}
+                    variant="outlined"
+                    label="Email"
+                    type="text"
+                    className={classes.textField}
+                    onChange={inputEmailHandler}
+                    value={inputEmail}
+                  />
+                  <>
+                    <TextField
+                      fullWidth
+                      sx={{ margin: 1 }}
+                      variant="outlined"
+                      label="Họ và tên"
+                      autoComplete="off"
+                      className={classes.textField}
+                      {...register("inputName", { required: "Điền tên" })}
+                    />
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      gutterBottom
+                      style={{ color: "red" }}
+                    >
+                      {errors.inputName?.message}
+                    </Typography>
+                  </>
 
-              <>
-                <TextField
-                  sx={{ margin: 1 }}
-                  id="standard-basic"
-                  variant="outlined"
-                  className={classes.textField}
-                  label="Số điện thoại"
-                  autoComplete="off"
-                  helperText=""
-                  {...register("inputPhone", {
-                    pattern: {
-                      value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
-                      message: "Nhập đúng định dạng số điện thoại",
-                    },
-                  })}
-                />
+                  <>
+                    <TextField
+                      fullWidth
+                      sx={{ margin: 1 }}
+                      id="standard-basic"
+                      variant="outlined"
+                      className={classes.textField}
+                      label="Số điện thoại"
+                      autoComplete="off"
+                      helperText=""
+                      {...register("inputPhone", {
+                        pattern: {
+                          value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
+                          message: "Nhập đúng định dạng số điện thoại",
+                        },
+                      })}
+                    />
 
-                <Typography
-                  variant="caption"
-                  display="block"
-                  gutterBottom
-                  style={{ color: "red" }}
-                >
-                  {errors.inputPhone?.message}
-                </Typography>
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      gutterBottom
+                      style={{ color: "red" }}
+                    >
+                      {errors.inputPhone?.message}
+                    </Typography>
 
-              </>
+                  </>
 
-              <TextField
-                variant="outlined"
-                className={classes.textField}
-                id="standard=basic"
-                label="CMND/CCCD"
-                autoComplete="off"
-                helperText=""
-                sx={{ margin: 1 }}
-                {...register("inputId", { required: "Nhập số CMND hoặc số CCCD" })}
-              />
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    className={classes.textField}
+                    id="standard=basic"
+                    label="CMND/CCCD"
+                    autoComplete="off"
+                    helperText=""
+                    sx={{ margin: 1 }}
+                    {...register("inputId", { required: "Nhập số CMND hoặc số CCCD" })}
+                  />
 
-              <>
-                <TextField
-                  sx={{ margin: 1, minWidth: 184 }}
-                  id="standard-basic"
-                  helperText="Tháng/Ngày/Năm sinh"
-                  variant="outlined"
-                  type="date"
-                  className={classes.textField}
-                  {...register("inputDate", { required: "Nhập ngày tháng năm sinh" })}
-                />
-                <Typography
-                  variant="caption"
-                  display="block"
-                  gutterBottom
-                  style={{ color: "red" }}
-                >
-                  {errors.inputDate?.message}
-                </Typography>
-              </>
-              <>
-                <TextField
-                  className={classes.textField}
-                  label="Địa chỉ"
-                  sx={{ margin: 1, marginBottom: 2 }}
-                  id="standard-basic"
-                  variant="outlined"
-                  autoComplete="off"
-                  {...register("inputAddress", { required: "Điền địa chỉ" })}
-                />
+                  <>
+                    <TextField
+                      fullWidth
+                      sx={{ margin: 1, minWidth: 184 }}
+                      id="standard-basic"
+                      helperText="Tháng/Ngày/Năm sinh"
+                      variant="outlined"
+                      type="date"
+                      className={classes.textField}
+                      {...register("inputDate", { required: "Nhập ngày tháng năm sinh" })}
+                    />
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      gutterBottom
+                      style={{ color: "red" }}
+                    >
+                      {errors.inputDate?.message}
+                    </Typography>
+                  </>
+                </Grid>
+                <Grid item sm={6}>
+                  <>
+                    <TextField
+                      fullWidth
+                      className={classes.textField}
+                      label="Địa chỉ"
+                      sx={{ margin: 1, marginBottom: 2 }}
+                      id="standard-basic"
+                      variant="outlined"
+                      autoComplete="off"
+                      {...register("inputAddress", { required: "Điền địa chỉ" })}
+                    />
 
-                <Typography
-                  variant="caption"
-                  display="block"
-                  gutterBottom
-                  style={{ color: "red" }}
-                >
-                  {errors.inputAddress?.message}
-                </Typography>
-              </>
-              <Stack>
-                <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-label">Thành phố</InputLabel>
-                  <Select
-                    sx={{ minWidth: 120 }}
-                    label={"Thành phố"}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    className="register-city"
-                    onChange={cityHandler}
-                    value={inputCity}
-                  >
-                    <MenuItem value="" disabled>
-                      Chọn thành phố
-                    </MenuItem>
-                    {fetchData &&
-                      fetchData.map((val) => (
-                        <MenuItem key={val.code} value={val.code}>
-                          {val.name}
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      gutterBottom
+                      style={{ color: "red" }}
+                    >
+                      {errors.inputAddress?.message}
+                    </Typography>
+                  </>
+                  <Stack>
+                    <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
+                      <InputLabel id="demo-simple-select-label">Thành phố</InputLabel>
+                      <Select
+                        fullWidth
+                        sx={{ minWidth: 120 }}
+                        label={"Thành phố"}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        onChange={cityHandler}
+                        value={inputCity}
+                        className={classes.textField}
+                      >
+                        <MenuItem value="" disabled>
+                          Chọn thành phố
                         </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-                <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-label">Quận/Huyện</InputLabel>
-                  <Select
-                    sx={{ minWidth: 120 }}
-                    label={"Quận/Huyện"}
-                    labelId="demo-simple-select-label1"
-                    id="demo-simple-select"
-                    className="register-district"
-                    onChange={districtHandler}
-                    value={inputDistrict}
-                  >
-                    <MenuItem value="" disabled>
-                      Chọn quận huyện
-                    </MenuItem>
-                    {district.districts &&
-                      district.districts.map((val) => (
-                        <MenuItem key={val.code} value={val.code}>
-                          {val.name}
+                        {fetchData &&
+                          fetchData.map((val) => (
+                            <MenuItem key={val.code} value={val.code}>
+                              {val.name}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                    <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
+                      <InputLabel id="demo-simple-select-label">Quận/Huyện</InputLabel>
+                      <Select
+                        fullWidth
+                        sx={{ minWidth: 120 }}
+                        label={"Quận/Huyện"}
+                        labelId="demo-simple-select-label1"
+                        id="demo-simple-select"
+                        onChange={districtHandler}
+                        value={inputDistrict}
+                        className={classes.textField}
+                      >
+                        <MenuItem value="" disabled>
+                          Chọn quận huyện
                         </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-                <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-label">Phường/Xã</InputLabel>
-                  <Select
-                    sx={{ minWidth: 120 }}
-                    label={"Phường/Xã"}
-                    labelId="demo-simple-select-label2"
-                    id="demo-simple-select"
-                    className="register-district"
-                    onChange={(event) => setInputWard(event.target.value)}
-                    value={inputWard}
-                  >
-                    <MenuItem value="" disabled>
-                      Chọn phường xã
-                    </MenuItem>
-                    {ward.wards &&
-                      ward.wards.map((val) => (
-                        <MenuItem key={val.code} value={val.name}>
-                          {val.name}
+                        {district.districts &&
+                          district.districts.map((val) => (
+                            <MenuItem key={val.code} value={val.code}>
+                              {val.name}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                    <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
+                      <InputLabel id="demo-simple-select-label">Phường/Xã</InputLabel>
+                      <Select
+                        fullWidth
+                        sx={{ minWidth: 120 }}
+                        label={"Phường/Xã"}
+                        labelId="demo-simple-select-label2"
+                        id="demo-simple-select"
+                        onChange={(event) => setInputWard(event.target.value)}
+                        value={inputWard}
+                        className={classes.textField}
+                      >
+                        <MenuItem value="" disabled>
+                          Chọn phường xã
                         </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-              </Stack>
+                        {ward.wards &&
+                          ward.wards.map((val) => (
+                            <MenuItem key={val.code} value={val.name}>
+                              {val.name}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Stack>
+                </Grid>
+              </Grid>
+
+
+
               <CardActions sx={{ justifyContent: 'flex-end' }}>
                 <Button variant="contained" type="submit">
                   Đăng ký
