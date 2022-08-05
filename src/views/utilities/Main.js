@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate,  Link as RouterLink } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 
 import { Link as MUILink } from "@mui/material";
@@ -370,6 +370,22 @@ const Main = () => {
             <div>
               <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
                 Bạn chưa có thông tin tiêm chủng
+                <Grid container>
+                  <Grid item>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Để yêu cầu thay đổi thông tin, vui lòng bấm
+                      <MUILink
+                        to="/utils/injection-info-request"
+                        underline="none"
+                        color="inherit"
+                        component={RouterLink}
+                        sx={{ fontWeight: 'bold', m: 1 }}
+                      >
+                        <Button variant="outlined" color="error">vào đây</Button>
+                      </MUILink>
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Typography>
             </div>
           )}

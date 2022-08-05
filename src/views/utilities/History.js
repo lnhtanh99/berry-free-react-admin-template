@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
 
+
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -24,7 +19,9 @@ import {
 } from "../../firebase/firebase";
 
 import { onSnapshot, doc, setDoc, orderBy, getDocs } from "@firebase/firestore";
-import { Typography, Container, Stack, Card, CardContent, Box } from "@mui/material";
+import { Typography, Container, Stack, Card, CardContent, Box, Grid, Button } from "@mui/material";
+
+import { Link as MUILink } from "@mui/material";
 
 import axios from "axios";
 
@@ -189,7 +186,7 @@ const History = () => {
             <CardContent>
               {injectionInfo && (
                 <div>
-                  <Typography variant="h2" sx ={{ textAlign: 'center', textTransform: 'uppercase' }} gutterBottom>
+                  <Typography variant="h2" sx={{ textAlign: 'center', textTransform: 'uppercase' }} gutterBottom>
                     Lịch sử lây nhiễm
                   </Typography>
                   {injectionInfo.infectedTimes === "" ? (
@@ -197,9 +194,22 @@ const History = () => {
                       <Typography variant="subtitle1" gutterBottom>
                         <em>Bạn chưa từng nhiễm bệnh</em>
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Bấm vào đây để tự khai lịch sử lây nhiễm của bạn
-                      </Typography>
+                      <Grid container>
+                        <Grid item>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Để yêu cầu thay đổi thông tin, vui lòng bấm
+                            <MUILink
+                              to="/utils/self-declare"
+                              underline="none"
+                              color="inherit"
+                              component={RouterLink}
+                              sx={{ fontWeight: 'bold', m: 1 }}
+                            >
+                              <Button variant="outlined" color="error">vào đây</Button>
+                            </MUILink>
+                          </Typography>
+                        </Grid>
+                      </Grid>
                     </Stack>
                   ) : (
                     <Stack>
@@ -214,7 +224,7 @@ const History = () => {
                                   variant="subtitle1"
                                   gutterBottom
                                 >
-                                  Ngày nhiễm bệnh lần 1: {injectionInfo?.infectedDate1} 
+                                  Ngày nhiễm bệnh lần 1: {injectionInfo?.infectedDate1}
                                 </Typography>
                                 <Typography
                                   variant="subtitle1"
@@ -234,7 +244,7 @@ const History = () => {
                                   variant="subtitle1"
                                   gutterBottom
                                 >
-                                  Ngày nhiễm bệnh lần 2: {injectionInfo?.infectedDate2} 
+                                  Ngày nhiễm bệnh lần 2: {injectionInfo?.infectedDate2}
                                 </Typography>
                                 <Typography
                                   variant="subtitle1"
@@ -254,7 +264,7 @@ const History = () => {
                                   variant="subtitle1"
                                   gutterBottom
                                 >
-                                  Ngày nhiễm bệnh lần 3: {injectionInfo?.infectedDate3} 
+                                  Ngày nhiễm bệnh lần 3: {injectionInfo?.infectedDate3}
                                 </Typography>
                                 <Typography
                                   variant="subtitle1"
@@ -342,13 +352,13 @@ const History = () => {
               )}
             </CardContent>
           ) : (
-              <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
-                Bạn chưa có thông tin tiêm chủng
-              </Typography>
+            <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
+              Bạn chưa có thông tin tiêm chủng
+            </Typography>
           )}
         </Card>
       ) : (
-        <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}> 
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
           Vui lòng đăng nhập để tiếp tục
         </Typography>
       )}
