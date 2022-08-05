@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/berry-free-react-admin-template/static/css/main.e1b9e8b4.css",
-    "main.js": "/berry-free-react-admin-template/static/js/main.cf039e4b.js",
+    "main.js": "/berry-free-react-admin-template/static/js/main.f23709ed.js",
     "static/js/137.10bb242f.chunk.js": "/berry-free-react-admin-template/static/js/137.10bb242f.chunk.js",
     "static/js/263.c10269c2.chunk.js": "/berry-free-react-admin-template/static/js/263.c10269c2.chunk.js",
     "static/js/865.fe6d28e0.chunk.js": "/berry-free-react-admin-template/static/js/865.fe6d28e0.chunk.js",
@@ -21,7 +21,7 @@
     "static/js/818.bb9ac669.chunk.js": "/berry-free-react-admin-template/static/js/818.bb9ac669.chunk.js",
     "index.html": "/berry-free-react-admin-template/index.html",
     "main.e1b9e8b4.css.map": "/berry-free-react-admin-template/static/css/main.e1b9e8b4.css.map",
-    "main.cf039e4b.js.map": "/berry-free-react-admin-template/static/js/main.cf039e4b.js.map",
+    "main.f23709ed.js.map": "/berry-free-react-admin-template/static/js/main.f23709ed.js.map",
     "137.10bb242f.chunk.js.map": "/berry-free-react-admin-template/static/js/137.10bb242f.chunk.js.map",
     "263.c10269c2.chunk.js.map": "/berry-free-react-admin-template/static/js/263.c10269c2.chunk.js.map",
     "865.fe6d28e0.chunk.js.map": "/berry-free-react-admin-template/static/js/865.fe6d28e0.chunk.js.map",
@@ -42,6 +42,6 @@
   },
   "entrypoints": [
     "static/css/main.e1b9e8b4.css",
-    "static/js/main.cf039e4b.js"
+    "static/js/main.f23709ed.js"
   ]
 }
