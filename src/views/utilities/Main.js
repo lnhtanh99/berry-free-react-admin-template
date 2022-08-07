@@ -367,7 +367,7 @@ const Main = () => {
               )}
             </CardContent>
           ) : (
-            <div>
+            <CardContent>
               <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
                 Bạn chưa có thông tin tiêm chủng
                 <Grid container>
@@ -387,7 +387,7 @@ const Main = () => {
                   </Grid>
                 </Grid>
               </Typography>
-            </div>
+            </CardContent>
           )}
         </Card>
       ) : (

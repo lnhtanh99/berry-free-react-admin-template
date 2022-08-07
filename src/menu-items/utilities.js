@@ -34,14 +34,6 @@ const utilities = {
             breadcrumbs: false
         },
         {
-            id: 'self-declare',
-            title: 'Khai báo tình trạng nhiễm bệnh',
-            type: 'item',
-            url: '/utils/self-declare',
-            icon: icons.IconWriting,
-            breadcrumbs: false
-        },
-        {
             id: 'info',
             title: 'Thông tin cá nhân',
             type: 'item',

@@ -346,15 +346,49 @@ const History = () => {
                           </div>
                         </Stack>
                       )}
+                      <Grid container>
+                        <Grid item>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Để yêu cầu thay đổi thông tin, vui lòng bấm
+                            <MUILink
+                              to="/utils/self-declare"
+                              underline="none"
+                              color="inherit"
+                              component={RouterLink}
+                              sx={{ fontWeight: 'bold', m: 1 }}
+                            >
+                              <Button variant="outlined" color="error">vào đây</Button>
+                            </MUILink>
+                          </Typography>
+                        </Grid>
+                      </Grid>
                     </Stack>
                   )}
                 </div>
               )}
             </CardContent>
           ) : (
-            <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
-              Bạn chưa có thông tin tiêm chủng
-            </Typography>
+            <CardContent>
+              <Typography variant="h5" gutterBottom sx={{ textAlign: 'center' }}>
+                Bạn chưa có thông tin tiêm chủng
+              </Typography>
+              <Grid container>
+                <Grid item>
+                  <Typography variant="subtitle1" gutterBottom>
+                    Để yêu cầu thay đổi thông tin, vui lòng bấm
+                    <MUILink
+                      to="/utils/self-declare"
+                      underline="none"
+                      color="inherit"
+                      component={RouterLink}
+                      sx={{ fontWeight: 'bold', m: 1 }}
+                    >
+                      <Button variant="outlined" color="error">vào đây</Button>
+                    </MUILink>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
           )}
         </Card>
       ) : (
